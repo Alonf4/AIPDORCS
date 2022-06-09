@@ -5,6 +5,7 @@
         "dtype",
         "figsize",
         "imshow",
+        "logits",
         "matplotlib",
         "MNIST",
         "pyplot",
