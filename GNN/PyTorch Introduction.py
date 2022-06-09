@@ -60,5 +60,3 @@ class NeuralNetwork(nn.Module):
 model = NeuralNetwork().to(device)
 print(model)
 
-# %% ANCHOR
-
