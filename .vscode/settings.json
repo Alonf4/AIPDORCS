@@ -3,6 +3,7 @@
         "cuda",
         "dtype",
         "MNIST",
+        "relu",
         "torchvision"
     ]
 }
