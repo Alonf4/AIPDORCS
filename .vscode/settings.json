@@ -1,8 +1,13 @@
 {
     "cSpell.words": [
+        "cmap",
         "cuda",
         "dtype",
+        "figsize",
+        "imshow",
+        "matplotlib",
         "MNIST",
+        "pyplot",
         "relu",
         "torchvision"
     ]
