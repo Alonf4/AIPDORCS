@@ -143,3 +143,24 @@ print("Saved PyTorch Model State to model.pth")
 # %% ANCHOR Loading the model
 model = NeuralNetwork()
 model.load_state_dict(torch.load("model.pth"))
+
+# %% ANCHOR Making model predictions
+classes = [
+    "T-Shirt/top",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle boot"
+]
+
+model.eval()
+X, y = test_data[0][0], test_data[0][1]
+with torch.no_grad():
+    pred = model(X)
+    predicted, actual = classes[pred[0].argmax(0)], classes[y]
+    print(f'Predicted: "{predicted}", Actual: "{actual}"')
