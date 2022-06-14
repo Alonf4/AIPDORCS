@@ -117,7 +117,7 @@ def test(dataloader, model, loss_fn):
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
     model.eval()
-    test_loss, current = 0, 0
+    test_loss, correct = 0, 0
     with torch.no_grad():
         for X, y in dataloader:
             X, y = X.to(device), y.to(device)
@@ -135,3 +135,7 @@ for t in range(epochs):
     train(train_data_loader, model, loss_fn, optimizer)
     test(test_data_loader, model, loss_fn)
 print("Done!")
+
+# %% ANCHOR Saving the model
+torch.save(model.state_dict(), "model.pth")
+print("Saved PyTorch Model State to model.pth")
