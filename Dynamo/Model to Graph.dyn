@@ -2430,6 +2430,105 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Geometry.DistanceTo@Autodesk.DesignScript.Geometry.Geometry",
+      "Id": "247070bbb2914404abb9a6075b921883",
+      "Inputs": [
+        {
+          "Id": "041a7968b22d4b298d23b66ec09df43f",
+          "Name": "geometry",
+          "Description": "Autodesk.DesignScript.Geometry.Geometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b71cbfeb816841b2bf75bdba06d69b99",
+          "Name": "other",
+          "Description": "The other Geometry\n\nGeometry",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "19f4f4173d754db39ca56cc5b6d703c1",
+          "Name": "double",
+          "Description": "The distance",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Obtain the distance from this Geometry to another\n\nGeometry.DistanceTo (other: Geometry): double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Geometry",
+      "Id": "db9f3b12c1744777bcca47a324f69d54",
+      "Inputs": [
+        {
+          "Id": "9244ddcbbe9944368745f1ef75b9ea93",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b693cbd1719640a1a56508f357834ffe",
+          "Name": "var[]",
+          "Description": "var[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get all of the Geometry associated with this object\n\nElement.Geometry ( ): var[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Geometry",
+      "Id": "b1f23309cc104d69ae2f9a290969af20",
+      "Inputs": [
+        {
+          "Id": "f385d89fa5f84e8eb83e3343cecc9306",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "23021470a29a409a9865a3cf8a83788c",
+          "Name": "var[]",
+          "Description": "var[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get all of the Geometry associated with this object\n\nElement.Geometry ( ): var[]"
     }
   ],
   "Connectors": [
@@ -2729,6 +2828,11 @@
       "Id": "11a1f0a9276344ab9b2b89cf39bf4166"
     },
     {
+      "Start": "47be9f65af62436ab3394f53b43874b6",
+      "End": "9244ddcbbe9944368745f1ef75b9ea93",
+      "Id": "345d0f2c122f43fda25004279daf9115"
+    },
+    {
       "Start": "7ac9be3a639143cbbda834a17cc9bb07",
       "End": "ee43381e64b24bdb9e4e797cc3e66c5c",
       "Id": "c98fc6dfc6f9446c87b804f1465791c8"
@@ -2794,6 +2898,11 @@
       "Id": "bfb5d10a1f69431a92ef38fecc8683dc"
     },
     {
+      "Start": "c9fa51212f244c69a9c30c9eacc0d61c",
+      "End": "f385d89fa5f84e8eb83e3343cecc9306",
+      "Id": "d3569b8061fc4c9da417990b2fdc591d"
+    },
+    {
       "Start": "2114f5e853344702a83d44a979b531d2",
       "End": "e46ead0929fd405799f81ca5b039391e",
       "Id": "c51f785c9df44665aacb5bb5eac5c0aa"
@@ -2812,6 +2921,16 @@
       "Start": "fc604e8f290d4bb7b9189bad5e9ea099",
       "End": "ba442bee9d3349d39b6be80d5c900a54",
       "Id": "74bd29ed98c7469ca4a2dd71ef7c2523"
+    },
+    {
+      "Start": "b693cbd1719640a1a56508f357834ffe",
+      "End": "b71cbfeb816841b2bf75bdba06d69b99",
+      "Id": "e456a39592274d2bb556e05bf6286cab"
+    },
+    {
+      "Start": "23021470a29a409a9865a3cf8a83788c",
+      "End": "041a7968b22d4b298d23b66ec09df43f",
+      "Id": "d3b37321986747309a65314903a18036"
     }
   ],
   "Dependencies": [
@@ -3634,9 +3753,57 @@
         "Excluded": false,
         "X": 1550.4879170554823,
         "Y": 3646.7405014164024
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Geometry.DistanceTo",
+        "Id": "247070bbb2914404abb9a6075b921883",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2829.4187403119527,
+        "Y": 3271.4545301541802
+      },
+      {
+        "ShowGeometry": false,
+        "Name": "Element.Geometry",
+        "Id": "db9f3b12c1744777bcca47a324f69d54",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2207.8537139739828,
+        "Y": 3258.6733910651997
+      },
+      {
+        "ShowGeometry": false,
+        "Name": "Element.Geometry",
+        "Id": "b1f23309cc104d69ae2f9a290969af20",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2423.7743526431159,
+        "Y": 3160.13895392408
       }
     ],
     "Annotations": [
+      {
+        "Id": "6c7a58f0d95045cc921e3416013fb609",
+        "Title": "Test for an alternative of finding connections",
+        "Nodes": [
+          "247070bbb2914404abb9a6075b921883",
+          "db9f3b12c1744777bcca47a324f69d54",
+          "b1f23309cc104d69ae2f9a290969af20"
+        ],
+        "Left": 2197.8537139739828,
+        "Top": 3107.13895392408,
+        "Width": 860.56502633796981,
+        "Height": 283.31557623010031,
+        "FontSize": 36.0,
+        "InitialTop": 3160.13895392408,
+        "InitialHeight": 260.31557623010031,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      },
       {
         "Id": "4a7e986eda6f4505ada538cc80507f03",
         "Title": "Check if some connections are missing and why",
@@ -3666,8 +3833,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -761.66957886984073,
-    "Y": -2386.8249339904614,
-    "Zoom": 0.83429666005379588
+    "X": -35.596090867389989,
+    "Y": -832.06656360912143,
+    "Zoom": 0.38346504685445343
   }
 }
