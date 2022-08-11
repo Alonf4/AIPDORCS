@@ -2529,6 +2529,244 @@
       ],
       "Replication": "Auto",
       "Description": "Get all of the Geometry associated with this object\n\nElement.Geometry ( ): var[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetIntersectingElementsOfCategory@Revit.Elements.Category",
+      "Id": "9a750a6dde0c4693a63f5b93998a4378",
+      "Inputs": [
+        {
+          "Id": "0f3aa842b5de4ff2a2840eb8efc02bd2",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0f9a9307ce1b4306ad3b20e15ce3e3dc",
+          "Name": "category",
+          "Description": "Category of Elements to check intersection against\n\nCategory",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6d341ee05b2348fdb6f32af47c15a888",
+          "Name": "Element[]",
+          "Description": "List of intersection elements of the specified category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets all Elements intersecting the input element, that are of a specific category.\n\nElement.GetIntersectingElementsOfCategory (category: Category): Element[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.AreJoined@Revit.Elements.Element",
+      "Id": "63115fa11e6a4cd99d493c42d0e5fe74",
+      "Inputs": [
+        {
+          "Id": "55c782ed93714dea8ce4166efb408b38",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b3afbff44a164c1399d65d18667e96a4",
+          "Name": "otherElement",
+          "Description": "Second element to check\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "57e30007a39645d0847c762ceb156186",
+          "Name": "bool",
+          "Description": "True if the two elements are joined, False otherwise",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Checks if two elements are joined\n\nElement.AreJoined (otherElement: Element): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Elements.Elements.JoinedElements@Revit.Elements.Element",
+      "Id": "f714ece85592473ba2014f5db7df3b7b",
+      "Inputs": [
+        {
+          "Id": "c19f508ecd6947628a7f50e60d494827",
+          "Name": "element",
+          "Description": "The element to check.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "12b0a0da86d742fe92222d5b9d275c87",
+          "Name": "joinedElements",
+          "Description": "The joined elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will report what elements are joined to the input element.\n\nElements.JoinedElements (element: Element): Element[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "archilab.Revit.Elements.Walls.JoinType@Revit.Elements.Element",
+      "Id": "0f319e0320e8468f976d2b7da57250cb",
+      "Inputs": [
+        {
+          "Id": "d31da38898714978a1b7892692954c20",
+          "Name": "wall",
+          "Description": "Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9bf1f615537e4f22a719eeb8c3f63ed8",
+          "Name": "Start",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "477993413a1c411bbcafe3d460acf7f6",
+          "Name": "End",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Walls.JoinType (wall: Element): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "8a41d7e6-40a2-4d28-81cd-55dbe94af4ef",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "61d5facf9c164eb48ac9552f46ad3e96",
+      "Inputs": [
+        {
+          "Id": "e617b2a21b234ac295aea801795779a9",
+          "Name": "element",
+          "Description": "Curve based element\nLongest lacing for several elements\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f15c15c946ae437894af9933ca233d34",
+          "Name": "Elements",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns all elements joined to the given element."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.FirstItem@var[]..[]",
+      "Id": "e7c8a475819546249a6d12e986dec3e9",
+      "Inputs": [
+        {
+          "Id": "aedc9fed407a403789ab38236a11a829",
+          "Name": "list",
+          "Description": "List to get the first item from.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6efa2ebed64848e3a1e95f35f6545917",
+          "Name": "item",
+          "Description": "First item in the list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the first item in a list.\n\nList.FirstItem (list: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetJoinedElements",
+      "Id": "30967ea624aa4ff49f543bcb969dfbf8",
+      "Inputs": [
+        {
+          "Id": "ba490e584bb949cba4077a06026a495b",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0512fb4db45b4743922d390b0a84049f",
+          "Name": "Element[]",
+          "Description": "All elements whose geometry is joined to the given element.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Finds the elements whose geometry is joined with the given element.\n\nElement.GetJoinedElements ( ): Element[]"
     }
   ],
   "Connectors": [
@@ -2551,6 +2789,11 @@
       "Start": "111985b8c87b44eb9c00e14043524446",
       "End": "eb66620549dd4735b36592ec15c6a33a",
       "Id": "cf5ae630412f4262b2e235cd542ed518"
+    },
+    {
+      "Start": "111985b8c87b44eb9c00e14043524446",
+      "End": "0f9a9307ce1b4306ad3b20e15ce3e3dc",
+      "Id": "38adbf80929d4383844ca3908425bdbe"
     },
     {
       "Start": "dddf9e9045164bb89e5053c9dca0f8d9",
@@ -2833,6 +3076,16 @@
       "Id": "345d0f2c122f43fda25004279daf9115"
     },
     {
+      "Start": "47be9f65af62436ab3394f53b43874b6",
+      "End": "0f3aa842b5de4ff2a2840eb8efc02bd2",
+      "Id": "f4432ea3138d44f09995a3b1e57f47b9"
+    },
+    {
+      "Start": "47be9f65af62436ab3394f53b43874b6",
+      "End": "aedc9fed407a403789ab38236a11a829",
+      "Id": "2a2447335ae2469792fa2563dd4fa585"
+    },
+    {
       "Start": "7ac9be3a639143cbbda834a17cc9bb07",
       "End": "ee43381e64b24bdb9e4e797cc3e66c5c",
       "Id": "c98fc6dfc6f9446c87b804f1465791c8"
@@ -2931,10 +3184,26 @@
       "Start": "23021470a29a409a9865a3cf8a83788c",
       "End": "041a7968b22d4b298d23b66ec09df43f",
       "Id": "d3b37321986747309a65314903a18036"
+    },
+    {
+      "Start": "6efa2ebed64848e3a1e95f35f6545917",
+      "End": "e617b2a21b234ac295aea801795779a9",
+      "Id": "406c8de973d44f0885548a41aa74e52c"
+    },
+    {
+      "Start": "6efa2ebed64848e3a1e95f35f6545917",
+      "End": "ba490e584bb949cba4077a06026a495b",
+      "Id": "8c362de619f14cba865dc203c6a86b74"
+    },
+    {
+      "Start": "6efa2ebed64848e3a1e95f35f6545917",
+      "End": "c19f508ecd6947628a7f50e60d494827",
+      "Id": "9d660c10cd024d9fa5eecfd4269447b9"
     }
   ],
   "Dependencies": [
-    "789a7c8d-0e9a-4679-a27b-94333dbf371f"
+    "789a7c8d-0e9a-4679-a27b-94333dbf371f",
+    "8a41d7e6-40a2-4d28-81cd-55dbe94af4ef"
   ],
   "NodeLibraryDependencies": [
     {
@@ -2955,7 +3224,8 @@
       "Version": "2022.4.19",
       "ReferenceType": "Package",
       "Nodes": [
-        "296e48a0d0d94ac4aa14fc052f695fdc"
+        "296e48a0d0d94ac4aa14fc052f695fdc",
+        "61d5facf9c164eb48ac9552f46ad3e96"
       ]
     },
     {
@@ -2964,7 +3234,16 @@
       "ReferenceType": "Package",
       "Nodes": [
         "f2cc07ca20b1472ea99bf94992b9870c",
-        "62a7f4ac40524c22aaabc0a65c2cc6ba"
+        "62a7f4ac40524c22aaabc0a65c2cc6ba",
+        "f714ece85592473ba2014f5db7df3b7b"
+      ]
+    },
+    {
+      "Name": "archi-lab.net",
+      "Version": "2023.213.1523",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "0f319e0320e8468f976d2b7da57250cb"
       ]
     }
   ],
@@ -3401,7 +3680,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5059.0821440258132,
+        "X": 5057.7440864945538,
         "Y": -67.531167671731765
       },
       {
@@ -3431,8 +3710,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5489.1241363373838,
-        "Y": 441.36795476596171
+        "X": 5632.5220246964573,
+        "Y": 459.10789971759971
       },
       {
         "ShowGeometry": true,
@@ -3783,6 +4062,76 @@
         "Excluded": false,
         "X": 2423.7743526431159,
         "Y": 3160.13895392408
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetIntersectingElementsOfCategory",
+        "Id": "9a750a6dde0c4693a63f5b93998a4378",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 2675.4653172248541,
+        "Y": 3439.4599400511884
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.AreJoined",
+        "Id": "63115fa11e6a4cd99d493c42d0e5fe74",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1922.3535697644943,
+        "Y": 3831.4926120819714
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ʳʰʸᵗʰᵐ|Elements.JoinedElements",
+        "Id": "f714ece85592473ba2014f5db7df3b7b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1569.83793457261,
+        "Y": 4352.91622042129
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Walls.JoinType",
+        "Id": "0f319e0320e8468f976d2b7da57250cb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2264.1399661850965,
+        "Y": 3635.0491475652352
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Get Joined Elements",
+        "Id": "61d5facf9c164eb48ac9552f46ad3e96",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1566.8909284844619,
+        "Y": 3838.0528859818737
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.FirstItem",
+        "Id": "e7c8a475819546249a6d12e986dec3e9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1300.00404215498,
+        "Y": 3827.2239555890528
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetJoinedElements",
+        "Id": "30967ea624aa4ff49f543bcb969dfbf8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1567.3542940494121,
+        "Y": 4120.6047970290274
       }
     ],
     "Annotations": [
@@ -3800,7 +4149,7 @@
         "Height": 283.31557623010031,
         "FontSize": 36.0,
         "InitialTop": 3160.13895392408,
-        "InitialHeight": 260.31557623010031,
+        "InitialHeight": 256.31557623010031,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -3833,8 +4182,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -35.596090867389989,
-    "Y": -832.06656360912143,
-    "Zoom": 0.38346504685445343
+    "X": -765.72426801911661,
+    "Y": -2759.9909832985231,
+    "Zoom": 0.79436495455363276
   }
 }
