@@ -95,6 +95,18 @@
       "NumberType": "Double",
       "Description": "A slider that produces numeric values.",
       "SelectedIndex": 0
+    },
+    {
+      "Id": "f038fd4aa6864f1681226130e51a9fae",
+      "Name": "Structure Type: 1-Residential, 2-Commercial, 3-Indutrial",
+      "Type": "number",
+      "Value": "1",
+      "MaximumValue": 3.0,
+      "MinimumValue": 1.0,
+      "StepValue": 1.0,
+      "NumberType": "Integer",
+      "Description": "A slider that produces integer values.",
+      "SelectedIndex": 0
     }
   ],
   "Outputs": [
@@ -6733,7 +6745,7 @@
         "ShowGeometry": true,
         "Name": "Structure Type: 1-Residential, 2-Commercial, 3-Indutrial",
         "Id": "f038fd4aa6864f1681226130e51a9fae",
-        "IsSetAsInput": false,
+        "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
         "X": 2113.6332490090681,
@@ -7769,8 +7781,8 @@
         "Background": "#FFFFAA45"
       }
     ],
-    "X": -1394.2264883064377,
-    "Y": -526.72741915143229,
-    "Zoom": 0.3082439934481459
+    "X": -1576.4819463467354,
+    "Y": -4093.1571434522812,
+    "Zoom": 0.87536385512761838
   }
 }
