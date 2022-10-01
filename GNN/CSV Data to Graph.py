@@ -1,14 +1,26 @@
 # ------------------------------ Modules Imports ----------------------------- #
 import csv
+import string
 
 # ------------------------- Get Elements Information ------------------------- #
-def getElementsInfo(fileName):
+def getElementsInfo(fileName: str):
+    """Extracting structural elements information to 3 lists from a given filename.
+
+    Args:
+        fileName (str): A path to the file.
+
+    Returns:
+        elemIDs (list): A list of element IDs.
+        elemConnections (list): A list of each element's connection lists.
+        elemGeoFeatures (list): A list of each element's geometric features lists.
+    """    
+    # Dictionary of number of features for each element type:
     featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
     
     # Lists of elements information:
-    elementIDs = []
-    elementConnections = []
-    elementGeometricFeatures = []
+    elemIDs = []
+    elemConnections = []
+    elemGeoFeatures = []
     tempList = []
     
     # Getting the number of geometric features in the given file
@@ -22,32 +34,34 @@ def getElementsInfo(fileName):
         for line in elementsFile:
             match line[0]:
                 case 'Beam ID' | 'Column ID' | 'Slab ID' | 'Wall ID':
-                    elementIDs.append(line[1])
+                    elemIDs.append(line[1])
                 case 'Beam Connections' | 'Column Connections' | \
                     'Slab Connections' | 'Wall Connections':
-                    elementConnections.append(line[1:])
+                    elemConnections.append(line[1:])
                 # Other = geometric features
                 case other:
                     tempList.append(line[1])
                     # Adding all element geometric features together:
                     if len(tempList) == featureCount:
-                        elementGeometricFeatures.append(tempList)
+                        elemGeoFeatures.append(tempList)
                         tempList = []
     
-    return elementIDs, elementConnections, elementGeometricFeatures
+    return elemIDs, elemConnections, elemGeoFeatures
 
 # ------------------------------- Main Function ------------------------------ #
 def main():
-    elements = []
-    elementsConnections = []
-    elementsGeometricFeatures = []
+    elemIDs = []
+    elemConnections = []
+    elemGeoFeatures = []
     
-    fileName = '~\\..\\Dynamo\\Project 001\\ColumnsData.csv'
-    elements, elementsConnections, elementsGeometricFeatures = getElementsInfo(fileName)
+    projectNumber = 2
     
-    print(elements, len(elements))
-    print(elementsConnections, len(elementsConnections))
-    print(elementsGeometricFeatures, len(elementsGeometricFeatures))
+    fileName = '~\\..\\Dynamo\\Project ' + f'{projectNumber:03d}' + '\\BeamsData.csv'
+    elemIDs, elemConnections, elemGeoFeatures = getElementsInfo(fileName)
+    
+    print(elemIDs, len(elemIDs))
+    print(elemConnections, len(elemConnections))
+    print(elemGeoFeatures, len(elemGeoFeatures))
 
 # ------------------------------- Run as Script ------------------------------ #
 if __name__ == '__main__':
