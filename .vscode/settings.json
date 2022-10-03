@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "AIPDORCS",
         "argmax",
         "cmap",
         "cuda",
@@ -12,6 +13,7 @@
         "optim",
         "pyplot",
         "relu",
+        "Technion",
         "torchvision"
     ]
 }

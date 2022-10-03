@@ -1,4 +1,5 @@
 # ------------------------------ Modules Imports ----------------------------- #
+import os
 import csv
 import pandas as pd
 import dgl
@@ -62,10 +63,10 @@ def homoGraphFromElementsInfo(dataDir: str, modelsCount: int):
     
     # Loop over models data from Dynamo:
     for model in range(1, modelsCount+1):
-        projectDir = dataDir + f'\\Project {model:03d}'
+        projectDir = f'{dataDir}\\Project {model:03d}'
         
-        with open(projectDir + '\\Nodes.csv', 'w') as csvFile1, \
-             open(projectDir + '\\Edges.csv', 'w') as csvFile2:
+        with open(f'{projectDir}\\Nodes.csv', 'w') as csvFile1, \
+             open(f'{projectDir}\\Edges.csv', 'w') as csvFile2:
             nodes = csv.writer(csvFile1)
             edges = csv.writer(csvFile2)
             nodes.writerow(['Node ID'])
@@ -73,7 +74,7 @@ def homoGraphFromElementsInfo(dataDir: str, modelsCount: int):
             
             # Loop over element types:
             for elementType in elementTypes:
-                fileName = projectDir + f'\\{elementType}sData.csv'
+                fileName = f'{projectDir}\\{elementType}sData.csv'
                 elemIDs, elemConnections, elemGeoFeatures = getElementsInfo(fileName)
                 for i in range(0, len(elemIDs)):
                     nodes.writerow([elemIDs[i]])
@@ -81,8 +82,8 @@ def homoGraphFromElementsInfo(dataDir: str, modelsCount: int):
                     # TODO: Write to edges file
                     # TODO: Add features to files
         
-        # nodesData = pd.read_csv('~\\OneDrive - Technion\\Research Data\\AIPDORCS\\Dynamo\\Project 001\\Nodes.csv')
-        # edgesData = pd.read_csv('~\\OneDrive - Technion\\Research Data\\AIPDORCS\\Dynamo\\Project 001\\Edges.csv')
+        nodesData = pd.read_csv(f'{projectDir}\\Nodes.csv')
+        edgesData = pd.read_csv(f'{projectDir}\\Edges.csv')
         # src = edgesData['Src ID'].to_numpy()
         # dst = edgesData['Dst ID'].to_numpy()
         
@@ -100,7 +101,8 @@ def main():
     # dataDir = input('Type a directory path here: ') or '~\\..\\Dynamo'
     # print('Please enter the number of models you have in this directory.')
     # modelsCount = int(input('Type an integer number of models: '))
-    dataDir = '~\\..\\Dynamo'
+    workspace = os.getcwd()
+    dataDir = f'{workspace}\\Dynamo'
     modelsCount = 2
     
     homoGraphFromElementsInfo(dataDir, modelsCount)
