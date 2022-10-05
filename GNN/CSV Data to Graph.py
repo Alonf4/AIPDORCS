@@ -57,7 +57,7 @@ def getElementsInfo(fileName: str):
     return elemIDs, elemConnections, elemGeoFeatures
 
 # ------------------ Build a graph from Elements Information ----------------- #
-def homoGraphFromElementsInfo(dataDir: str, modelsCount: int):
+def homoGraphFromElementsInfo(dataDir: str, modelsCount: int, featureCount: int):
     # List of structural element types possible:
     elementTypes = ['Beam', 'Column', 'Slab', 'Wall']
     
@@ -69,18 +69,24 @@ def homoGraphFromElementsInfo(dataDir: str, modelsCount: int):
              open(f'{projectDir}\\Edges.csv', 'w') as csvFile2:
             nodes = csv.writer(csvFile1)
             edges = csv.writer(csvFile2)
-            nodes.writerow(['Node ID'])
+            nodes.writerow(['Node ID', 'Dim 1', 'Dim 2', 'Dim 3', 'Volume'])
             edges.writerow(['Edge ID', 'Src ID', 'Dst ID'])
             
             # Loop over element types:
             for elementType in elementTypes:
                 fileName = f'{projectDir}\\{elementType}sData.csv'
                 elemIDs, elemConnections, elemGeoFeatures = getElementsInfo(fileName)
+                
+                # Slicing elemGeoFeatures to get only 4 features of each element:
+                for i in elemGeoFeatures:
+                    if len(i) > featureCount:
+                        del i[featureCount:]
+                
                 for i in range(0, len(elemIDs)):
-                    nodes.writerow([elemIDs[i]])
+                    nodes.writerow([elemIDs[i]] + elemGeoFeatures[i])
+                    # FIXME: The dimension features are not in the same order for all elements
                     
                     # TODO: Write to edges file
-                    # TODO: Add features to files
         
         nodesData = pd.read_csv(f'{projectDir}\\Nodes.csv')
         edgesData = pd.read_csv(f'{projectDir}\\Edges.csv')
@@ -104,8 +110,9 @@ def main():
     workspace = os.getcwd()
     dataDir = f'{workspace}\\Dynamo'
     modelsCount = 2
+    featureCount = 4
     
-    homoGraphFromElementsInfo(dataDir, modelsCount)
+    homoGraphFromElementsInfo(dataDir, modelsCount, featureCount)
 
 # ------------------------------- Run as Script ------------------------------ #
 if __name__ == '__main__':
