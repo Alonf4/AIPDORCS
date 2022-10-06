@@ -57,18 +57,19 @@ def getElementsInfo(fileName: str):
     return elemIDs, elemConnections, elemGeoFeatures
 
 # ------------------ Build a graph from Elements Information ----------------- #
-def homoGraphFromElementsInfo(dataDir: str, modelsCount: int, featureCount: int):
+def homoGraphFromElementsInfo(dataDir: str, modelCount: int, featureCount: int):
     # List of structural element types possible:
     elementTypes = ['Beam', 'Column', 'Slab', 'Wall']
     
     # Loop over models data from Dynamo:
-    for model in range(1, modelsCount+1):
+    for model in range(1, modelCount+1):
         projectDir = f'{dataDir}\\Project {model:03d}'
         
         with open(f'{projectDir}\\Nodes.csv', 'w') as csvFile1, \
              open(f'{projectDir}\\Edges.csv', 'w') as csvFile2:
             nodes = csv.writer(csvFile1)
             edges = csv.writer(csvFile2)
+            # Writing header to CSV files:
             nodes.writerow(['Node ID', 'Dim 1', 'Dim 2', 'Dim 3', 'Volume'])
             edges.writerow(['Edge ID', 'Src ID', 'Dst ID'])
             
@@ -77,16 +78,18 @@ def homoGraphFromElementsInfo(dataDir: str, modelsCount: int, featureCount: int)
                 fileName = f'{projectDir}\\{elementType}sData.csv'
                 elemIDs, elemConnections, elemGeoFeatures = getElementsInfo(fileName)
                 
-                # Slicing elemGeoFeatures to get only 4 features of each element:
+                # Slicing elemGeoFeatures to get only the given number of features for each element:
                 for i in elemGeoFeatures:
                     if len(i) > featureCount:
                         del i[featureCount:]
                 
+                # Loop over elements in each CSV file:
                 for i in range(0, len(elemIDs)):
                     nodes.writerow([elemIDs[i]] + elemGeoFeatures[i])
                     # FIXME: The dimension features are not in the same order for all elements
                     
                     # TODO: Write to edges file
+                    
         
         nodesData = pd.read_csv(f'{projectDir}\\Nodes.csv')
         edgesData = pd.read_csv(f'{projectDir}\\Edges.csv')
@@ -106,13 +109,13 @@ def main():
     #       'or leave empty to use the default path "~\\..\\Dynamo".')
     # dataDir = input('Type a directory path here: ') or '~\\..\\Dynamo'
     # print('Please enter the number of models you have in this directory.')
-    # modelsCount = int(input('Type an integer number of models: '))
+    # modelCount = int(input('Type an integer number of models: '))
     workspace = os.getcwd()
     dataDir = f'{workspace}\\Dynamo'
-    modelsCount = 2
+    modelCount = 2
     featureCount = 4
     
-    homoGraphFromElementsInfo(dataDir, modelsCount, featureCount)
+    homoGraphFromElementsInfo(dataDir, modelCount, featureCount)
 
 # ------------------------------- Run as Script ------------------------------ #
 if __name__ == '__main__':
