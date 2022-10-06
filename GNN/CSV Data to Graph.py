@@ -56,7 +56,36 @@ def getElementsInfo(fileName: str):
     
     return elemIDs, elemConnections, elemGeoFeatures
 
-# ------------------ Build a graph from Elements Information ----------------- #
+# ------------------ Check if a Graph's Edge Already Exists ------------------ #
+def isEdgeAlreadyExists(allEdges: list, edge: list):
+    """Returns 'True' if any sublist of 'allEdges' list contains the specified 'edge' list, Otherwise 'False'.
+
+    Parameters
+    ----------
+    ``allEdges (list)``: A list of graph edges lists (2-dimensional list).
+    ``edge (list)``: A list of one graph edge.
+
+    Returns
+    -------
+    ``result (bool)``: A variable indicating whether the edge exists or not.
+    
+    Examples
+    --------
+    >>> # Given lists:
+    >>> list1 = [['A1', 'A2'], ['A1', 'A3']]
+    >>> list2 = ['A3', 'A1']
+    >>> # Calling the function to see if list1 contains list2 in any order:
+    >>> result = isEdgeAlreadyExists(list1, list2)
+    >>> # result == True
+    """
+    result = False
+    for i in range(len(allEdges)):
+        if all(connection in allEdges[i] for connection in edge):
+            result = True
+            break
+    return result
+
+# ------------------ Build a Graph from Elements Information ----------------- #
 def homoGraphFromElementsInfo(dataDir: str, modelCount: int, featureCount: int):
     # List of structural element types possible:
     elementTypes = ['Beam', 'Column', 'Slab', 'Wall']
