@@ -79,11 +79,41 @@ def isEdgeAlreadyExists(allEdges: list, edge: list):
     >>> # result == True
     """
     result = False
+    
+    # Loop over sub-lists of 'allEdges' list:
     for i in range(len(allEdges)):
         if all(connection in allEdges[i] for connection in edge):
             result = True
             break
+    
     return result
+
+def elemConnectionsToEdges(allIDs: list, allConnections: list):
+    """_summary_
+    
+    Parameters
+    ----------
+    ``allIDs (list)``: _description_
+    ``allConnections (list)``: _description_
+    
+    Returns
+    -------
+    `` (_type_)``: _description_
+    
+    Examples
+    --------
+    >>> _codeExample_"""
+    edgesList = []
+    
+    for i, elemConnections in enumerate(allConnections):
+        elemID = allIDs[i]
+        
+        for connection in elemConnections:
+            edge = [elemID, connection] # FIXME: add node ID instead of element ID
+            if not isEdgeAlreadyExists(edgesList, edge):
+                edgesList.append(edge)
+    
+    return edgesList
 
 # ------------------ Build a Graph from Elements Information ----------------- #
 def homoGraphFromElementsInfo(dataDir: str, modelCount: int, featureCount: int):
@@ -95,12 +125,16 @@ def homoGraphFromElementsInfo(dataDir: str, modelCount: int, featureCount: int):
         projectDir = f'{dataDir}\\Project {model:03d}'
         
         with open(f'{projectDir}\\Nodes.csv', 'w') as csvFile1, \
-             open(f'{projectDir}\\Edges.csv', 'w') as csvFile2:
+            open(f'{projectDir}\\Edges.csv', 'w') as csvFile2:
             nodes = csv.writer(csvFile1)
             edges = csv.writer(csvFile2)
             # Writing header to CSV files:
-            nodes.writerow(['Node ID', 'Dim 1', 'Dim 2', 'Dim 3', 'Volume'])
-            edges.writerow(['Edge ID', 'Src ID', 'Dst ID'])
+            nodes.writerow(['Node ID', 'Element ID', 'Dim 1', 'Dim 2', 'Dim 3', 'Volume'])
+            edges.writerow(['Src ID', 'Dst ID'])
+            
+            allIDs = []
+            allConnections = []
+            allGeoFeatures = []
             
             # Loop over element types:
             for elementType in elementTypes:
@@ -112,24 +146,42 @@ def homoGraphFromElementsInfo(dataDir: str, modelCount: int, featureCount: int):
                     if len(i) > featureCount:
                         del i[featureCount:]
                 
-                # Loop over elements in each CSV file:
-                for i in range(0, len(elemIDs)):
-                    nodes.writerow([elemIDs[i]] + elemGeoFeatures[i])
-                    # FIXME: The dimension features are not in the same order for all elements
-                    
-                    # TODO: Write to edges file
-                    
+                # Getting all elements' information from all element types:
+                allIDs.extend(elemIDs)
+                allConnections.extend(elemConnections)
+                allGeoFeatures.extend(elemGeoFeatures)
+            
+            # Loop over elements in each CSV file:
+            nodeIDs = []
+            for i in range(0, len(allIDs)):
+                nodes.writerow([i] + [allIDs[i]] + allGeoFeatures[i])
+                nodeIDs.append(i)
+                # FIXME: The dimension features are not in the same order for all elements
+            
+            # TODO: Write to edges file
+            edgesList = elemConnectionsToEdges(nodeIDs, allConnections)
+            intEdgesList = []
+            # for i in edgesList:
+                # intEdgesList[i] = list(map(int, i))
+            edges.writerows(edgesList)
         
         nodesData = pd.read_csv(f'{projectDir}\\Nodes.csv')
         edgesData = pd.read_csv(f'{projectDir}\\Edges.csv')
         # src = edgesData['Src ID'].to_numpy()
         # dst = edgesData['Dst ID'].to_numpy()
         
-        # g = dgl.graph((src, dst))
+        src = [0, 0, 1]
+        dst = [1, 3, 2]
         
-        # nx_g = g.to_networkx()
-        # nx.draw(nx_g, with_labels=True)
-        # plt.show()
+        nodeDict = {0: 'B9', 1: 'B10', 2: 'C24', 3: 'W76'}
+        
+        g = dgl.graph((src, dst))
+        
+        nxGraph = g.to_networkx()
+        nx.draw_networkx(nxGraph, with_labels=True, arrowstyle='-', node_size=1000, \
+                        node_color='#0091ea', edge_color='#607d8b', width=4.0, \
+                        labels=nodeDict, label='Model Graph')
+        plt.show()
 
 # ------------------------------- Main Function ------------------------------ #
 def main():
