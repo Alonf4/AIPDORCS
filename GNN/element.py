@@ -5,6 +5,7 @@ class Element:
     Class Attributes
     ----------------
         ``featuresDict (dict)``: A dictionary with keys of element types and values of number of features.
+        ``countDict (dict)``: A dictionary containing the number of elements for each type, and the total existing number of elements.
     
     Instance Attributes
     --------------------
@@ -12,6 +13,12 @@ class Element:
         ``type (str)``: The type of the structural element.
         ``features (list)``: All features of the structural element.
         ``connections (list)``: All connections to other structural elements
+    
+    Methods
+    -------
+    ``homoFeatureCount()``: Returns the smallest number of features of all types, for a uniform number of features.
+    ``typeCount()``: Returns the number of existing elements of this type.
+    ``totalCount()``: Returns the number of existing elements overall.
     
     Examples
     --------
@@ -25,6 +32,7 @@ class Element:
     >>> # Output: '[B1],[1, 2, 3],[]'
     """
     featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
+    countDict = {'Total': 0}
     
     def __init__(self, id:str, features:list=None, connections:list=None):
         self.id = id
@@ -32,8 +40,8 @@ class Element:
         # Initialize element type with None in case of empty dictionary or a mismatch between the dictionary and the id:
         self.type = None
         # If the dictionary is not empty, get the element type from the first letter of its id attribute:
-        if self.featuresDict:
-            for key in self.featuresDict.keys():
+        if Element.featuresDict:
+            for key in Element.featuresDict.keys():
                 if self.id[0] == key[0]:
                     self.type = key
         
@@ -48,6 +56,18 @@ class Element:
             self.connections = connections
         else:
             self.connections = []
+        
+        # If this is the first instance of this type, initialize the counter for this type:
+        if not self.type in Element.countDict.keys():
+            Element.countDict[self.type] = 0
+        # Increase the total number of elements for each new element instance:
+        Element.countDict['Total'] += 1
+        Element.countDict[self.type] += 1
+    
+    def __del__(self):
+        # Decrease the total number of elements for each deleted element instance:
+        Element.countDict['Total'] -= 1
+        Element.countDict[self.type] -= 1
     
     def __str__(self) -> str:
         return f'[{self.id}],{self.features},{self.connections}'
@@ -68,15 +88,21 @@ class Element:
         count = 0
         
         # If the dictionary is empty, there are no features:
-        if not self.featuresDict:
+        if not Element.featuresDict:
             return count
         # If the dictionary is not empty, initialize it with its first value:
         else:
-            count = list(self.featuresDict.values()[0])
+            count = list(Element.featuresDict.values()[0])
         
         # Getting the smallest number of features from all element types:
-        for value in self.featuresDict.values():
+        for value in Element.featuresDict.values():
             if count < value:
                 count = value
         
         return count
+    
+    def typeCount(self):
+        return Element.countDict[self.type]
+    
+    def totalCount(self):
+        return Element.countDict['Total']
