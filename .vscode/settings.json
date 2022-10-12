@@ -2,6 +2,7 @@
     "cSpell.words": [
         "AIPDORCS",
         "argmax",
+        "arrowstyle",
         "cmap",
         "cuda",
         "dtype",
@@ -15,5 +16,6 @@
         "relu",
         "Technion",
         "torchvision"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "off"
 }
