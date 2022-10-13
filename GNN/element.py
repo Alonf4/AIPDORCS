@@ -96,11 +96,11 @@ class Element:
             return count
         # If the dictionary is not empty, initialize it with its first value:
         else:
-            count = list(cls.featuresDict.values()[0])
+            count = list(cls.featuresDict.values())[0]
         
         # Getting the smallest number of features from all element types:
         for value in cls.featuresDict.values():
-            if count < value:
+            if count > value:
                 count = value
         
         return count
@@ -111,3 +111,21 @@ class Element:
     
     def typeCount(self):
         return Element.countDict[self.type]
+
+class Node:
+    def __init__(self, nodeID:int, element:Element):
+        self.nodeID = nodeID
+        self.element = element
+    
+    def getNodeAsList(self):
+        featureCount = self.element.homoFeatureCount()
+        return [self.nodeID] + [self.element.id] + self.element.features[:featureCount]
+
+class Edge:
+    def __init__(self, edgeID:int, src:Node, dst:Node):
+        self.edgeID = edgeID
+        self.src = src
+        self.dst = dst
+    
+    def getEdgeAsList(self):
+        return [self.src.nodeID] + [self.dst.nodeID]
