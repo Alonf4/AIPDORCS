@@ -8,17 +8,20 @@ class Element:
         ``countDict (dict)``: A dictionary containing the number of elements for each type, and the total existing number of elements.
     
     Instance Attributes
-    --------------------
+    -------------------
         ``id (str)``: The id of the structural element.
         ``type (str)``: The type of the structural element.
         ``features (list)``: All features of the structural element.
         ``connections (list)``: All connections to other structural elements
     
-    Methods
-    -------
+    Class Methods
+    -------------
     ``homoFeatureCount()``: Returns the smallest number of features of all types, for a uniform number of features.
-    ``typeCount()``: Returns the number of existing elements of this type.
     ``totalCount()``: Returns the number of existing elements overall.
+    
+    Instance Methods
+    ----------------
+    ``typeCount()``: Returns the number of existing elements of this type.
     
     Examples
     --------
@@ -31,7 +34,7 @@ class Element:
     >>> print(element2)
     >>> # Output: '[B1],[1, 2, 3],[]'
     """
-    featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
+    featuresDict = {}
     countDict = {'Total': 0}
     
     def __init__(self, id:str, features:list=None, connections:list=None):
@@ -72,7 +75,8 @@ class Element:
     def __str__(self) -> str:
         return f'[{self.id}],{self.features},{self.connections}'
     
-    def homoFeatureCount(self):
+    @classmethod
+    def homoFeatureCount(cls):
         """Based on the class attribute ``featuresDict (dict)``, return the smallest number of features.
         
         Returns
@@ -88,21 +92,22 @@ class Element:
         count = 0
         
         # If the dictionary is empty, there are no features:
-        if not Element.featuresDict:
+        if not cls.featuresDict:
             return count
         # If the dictionary is not empty, initialize it with its first value:
         else:
-            count = list(Element.featuresDict.values()[0])
+            count = list(cls.featuresDict.values()[0])
         
         # Getting the smallest number of features from all element types:
-        for value in Element.featuresDict.values():
+        for value in cls.featuresDict.values():
             if count < value:
                 count = value
         
         return count
     
+    @classmethod
+    def totalCount(cls):
+        return cls.countDict['Total']
+    
     def typeCount(self):
         return Element.countDict[self.type]
-    
-    def totalCount(self):
-        return Element.countDict['Total']
