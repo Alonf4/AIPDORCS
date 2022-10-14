@@ -1,16 +1,14 @@
 {{! A.D.A Custom Docstring Template }}
 {{summaryPlaceholder}}
-
 {{extendedSummaryPlaceholder}}
 {{#parametersExist}}
-
 Parameters
 ----------
 {{#args}}
-``{{var}} ({{typePlaceholder}})``: {{descriptionPlaceholder}}
+    ``{{var}} ({{typePlaceholder}})``: {{descriptionPlaceholder}}
 {{/args}}
 {{#kwargs}}
-``{{var}} ({{typePlaceholder}}, optional)``: {{descriptionPlaceholder}}, by default {{&default}}
+    ``{{var}} ({{typePlaceholder}}, optional)``: {{descriptionPlaceholder}}, by default {{&default}}
 {{/kwargs}}
 {{/parametersExist}}
 {{#returnsExist}}
@@ -18,7 +16,7 @@ Parameters
 Returns
 -------
 {{#returns}}
-``{{var}} ({{typePlaceholder}})``: {{descriptionPlaceholder}}
+    ``({{typePlaceholder}})``: {{descriptionPlaceholder}}
 {{/returns}}
 {{/returnsExist}}
 {{#yieldsExist}}
