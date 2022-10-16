@@ -8,29 +8,29 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 # AIPDORCS modules:
-from element import Element
+from classes import *
 
 # ------------------------- Get Elements Information ------------------------- #
 def getElementsInfo(fileName: str):
-    """Extracting structural elements information to 3 lists from a given filename.
-
+    """Extracting structural elements information to a list from a given filename.
+    
     Parameters
     ----------
-        ``fileName (str)``: A path to the file.
-
+        ``fileName (str)``: A path to a file.
+    
     Returns
-    ----------
-        ``elemIDs (list)``: A list of element IDs.
-        ``elemConnections (list)``: A list of each element's connection lists.
-        ``elemGeoFeatures (list)``: A list of each element's geometric features lists.
+    -------
+        ``(list[Element])``: A list of all structural elements information.
+    
     """    
     # Dictionary of number of features for each element type:
-    featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
+    featuresDict = Element.featuresDict
     
     # Lists of elements information:
     elemIDs = []
     elemConnections = []
     elemGeoFeatures = []
+    elemList = []
     tempList = []
     
     # Getting the number of geometric features in the given file:
@@ -48,7 +48,8 @@ def getElementsInfo(fileName: str):
                 
                 case 'Beam Connections' | 'Column Connections' | \
                     'Slab Connections' | 'Wall Connections':
-                    elemConnections.append(line[1:])
+                    # Removing duplicates (if exist):
+                    elemConnections.append(list(set(line[1:])))
                 
                 case other: # other = geometric features
                     tempList.append(line[1])
@@ -57,71 +58,133 @@ def getElementsInfo(fileName: str):
                         elemGeoFeatures.append(tempList)
                         tempList = []
     
-    return elemIDs, elemConnections, elemGeoFeatures
-
-# ------------------ Check if a Graph's Edge Already Exists ------------------ #
-def isEdgeAlreadyExists(allEdges: list, edge: list):
-    """Returns 'True' if any sublist of 'allEdges' list contains the specified 'edge' list, Otherwise 'False'.
-
-    Parameters
-    ----------
-    ``allEdges (list)``: A list of graph edges lists (2-dimensional list).
-    ``edge (list)``: A list of one graph edge.
-
-    Returns
-    -------
-    ``result (bool)``: A variable indicating whether the edge exists or not.
+    # Creating a list of all elements with all their information from the CSV files:
+    for i in range(len(elemIDs)):
+        elemList.append(Element(elemIDs[i], elemGeoFeatures[i], elemConnections[i]))
     
-    Examples
-    --------
-    >>> # Given lists:
-    >>> list1 = [['A1', 'A2'], ['A1', 'A3']]
-    >>> list2 = ['A3', 'A1']
-    >>> # Calling the function to see if list1 contains list2 in any order:
-    >>> result = isEdgeAlreadyExists(list1, list2)
-    >>> # result == True
-    """
-    result = False
-    
-    # Loop over sub-lists of 'allEdges' list:
-    for i in range(len(allEdges)):
-        if all(connection in allEdges[i] for connection in edge):
-            result = True
-            break
-    
-    return result
+    return elemList
 
-def elemConnectionsToEdges(allIDs: list, allConnections: list):
-    """_summary_
+# --------------------- Get Structural Element by Node ID -------------------- #
+def nodeByID(allNodes: list[Node], elemID:str):
+    """Finding and returning the graph node in the given list of nodes, by its element ID.
     
     Parameters
     ----------
-    ``allIDs (list)``: _description_
-    ``allConnections (list)``: _description_
+        ``allNodes (list[Node])``: A list of graph nodes.
+        ``elemID (str)``: An element ID.
     
     Returns
     -------
-    `` (_type_)``: _description_
+        ``(Node | None)``: The graph node if exist in the list, otherwise None.
+    """    
+    # Loop over all nodes (all elements)
+    for node in allNodes:
+        if node.element.id == elemID:
+            # Return the element with the given id, found in the given list
+            return node
     
-    Examples
-    --------
-    >>> _codeExample_"""
+    # Return None if no element was found:
+    return None
+
+# ----------------------- Creating Edges Based on Nodes ---------------------- #
+def nodesToEdges(allNodes: list[Node]):
+    """Creating a list of graph edges based on a list of graph nodes.
+    
+    Parameters
+    ----------
+        ``allNodes (list[Node])``: A list of graph nodes.
+    
+    Returns
+    -------
+        ``(list[Edge])``: A list of graph edges.
+    """    
     edgesList = []
     
-    for i, elemConnections in enumerate(allConnections):
-        elemID = allIDs[i]
-        
-        for connection in elemConnections:
-            edge = [elemID, connection] # FIXME: add node ID instead of element ID
-            if not isEdgeAlreadyExists(edgesList, edge):
+    # Loop over all nodes (all elements)
+    for node in allNodes:
+        # Loop over all elements connected to this node
+        for connection in node.element.connections:
+            # Creating a new edge class instance for each connection
+            edge = Edge(id, node, nodeByID(allNodes, connection))
+            if edge not in edgesList: # FIXME: Homogenous Graph should contain edges of both directions.
                 edgesList.append(edge)
     
     return edgesList
 
-# ------------------ Build a Graph from Elements Information ----------------- #
-def homoGraphFromElementsInfo(dataDir: str, modelCount: int, featureCount: int):
+# -------------------- Visualizing a Graph using Networkx -------------------- #
+def nxGraphVisualization(model: int, projectDir: str, graph, nodeDict:dict, figSave:bool = True):
+    """Visualizing a DGL graph using Networkx. Returns nothing.
+    
+    Parameters
+    ----------
+        ``model (int)``: Project number for the graph title.
+        ``projectDir (str)``: Path of the project directory for saving the graph figure.
+        ``graph (_type_)``: A DGL graph object.
+        ``nodeDict (dict)``: A dictionary of labels for the graph nodes.
+        ``figSave (bool, optional)``: Whether or not to save the figure, True by default.
+    """
+    # Converting the graph to networkx graph and drawing it:
+    nxGraph = graph.to_networkx()
+    nx.draw_networkx(nxGraph, with_labels=True, arrowstyle='-', node_size=1000, \
+                    node_color='#0091ea', edge_color='#607d8b', width=2.0, \
+                    labels=nodeDict, label='Model Graph')
+    # Figure settings:
+    fig = plt.gcf()
+    fig.suptitle(f'Project {model:03d} Graph', fontsize=20)
+    fig.set_size_inches(20, 12)
+    
+    # Saving the graph figure if requested, otherwise just showing it:
+    if figSave == True:
+        plt.savefig(f'{projectDir}\graph.png', dpi=300)
+    else:
+        plt.show()
+
+# --------- Creating an Homogenous Graph from Nodes.csv and Edges.csv -------- #
+def homoGraph(model: int, projectDir: str, allNodes: list[Node], visualizeGraph:bool = True, figSave:bool = True):
+    """Creating an Homogenous DGL Graph based on Nodes.csv and Edges.csv files, and returns the graph.
+    
+    Parameters
+    ----------
+        ``model (int)``: Project number.
+        ``projectDir (str)``: Path of the project directory to get the graph data from.
+        ``allNodes (list[Node])``: A list of all nodes in the graph.
+        ``visualizeGraph (bool, optional)``: Whether or not to visualize the graph, True by default.
+        ``figSave (bool, optional)``: Whether or not to save the graph figure, True by default.
+    
+    Returns
+    -------
+        ``(DGLHeteroGraph)``: A DGL graph object.
+    """
+    # Reading graph data from CSV files:
+    nodesData = pd.read_csv(f'{projectDir}\\Nodes.csv')
+    edgesData = pd.read_csv(f'{projectDir}\\Edges.csv')
+    src = edgesData['Src ID'].to_numpy()
+    dst = edgesData['Dst ID'].to_numpy()
+    # Creating an homogenous DGL graph:
+    graph = dgl.graph((src, dst))
+    
+    # If graph visualization is enabled, make a figure:
+    if visualizeGraph == True:
+        nodeDict = {}
+        for node in allNodes:
+            nodeDict[node.nodeID] = node.element.id
+        nxGraphVisualization(model, projectDir, graph, nodeDict, figSave)
+    
+    return graph
+
+# -------- Creating Nodes.csv and Edges.csv from Elements Information -------- #
+def homoGraphFromElementsInfo(dataDir: str, modelCount: int, visualizeGraph:bool = True, figSave:bool = True):
+    """Creating a DGL graph for each model based on elements information given from Dynamo. Returns nothing.
+    
+    Parameters
+    ----------
+        ``dataDir (str)``: A path to a directory containing all elements information from all models.
+        ``modelCount (int)``: The number of models in the dataset.
+        ``visualizeGraph (bool, optional)``: Whether or not to visualize each graph, True by default.
+        ``figSave (bool, optional)``: Whether or not to save each graph figure, True by default.
+    """
     # List of structural element types possible:
-    elementTypes = ['Beam', 'Column', 'Slab', 'Wall']
+    elementTypes = list(Element.featuresDict.keys())
     
     # Loop over models data from Dynamo:
     for model in range(1, modelCount+1):
@@ -135,71 +198,42 @@ def homoGraphFromElementsInfo(dataDir: str, modelCount: int, featureCount: int):
             nodes.writerow(['Node ID', 'Element ID', 'Dim 1', 'Dim 2', 'Dim 3', 'Volume'])
             edges.writerow(['Src ID', 'Dst ID'])
             
-            allIDs = []
-            allConnections = []
-            allGeoFeatures = []
-            
+            allElements = []
             # Loop over element types:
             for elementType in elementTypes:
                 fileName = f'{projectDir}\\{elementType}sData.csv'
-                elemIDs, elemConnections, elemGeoFeatures = getElementsInfo(fileName)
-                
-                # Slicing elemGeoFeatures to get only the given number of features for each element:
-                for i in elemGeoFeatures:
-                    if len(i) > featureCount:
-                        del i[featureCount:]
-                
+                elemList = getElementsInfo(fileName)
                 # Getting all elements' information from all element types:
-                allIDs.extend(elemIDs)
-                allConnections.extend(elemConnections)
-                allGeoFeatures.extend(elemGeoFeatures)
+                allElements.extend(elemList)
             
-            # Loop over elements in each CSV file:
-            nodeIDs = []
-            for i in range(0, len(allIDs)):
-                nodes.writerow([i] + [allIDs[i]] + allGeoFeatures[i])
-                nodeIDs.append(i)
-                # FIXME: The dimension features are not in the same order for all elements
+            # Writing to Nodes.csv file:
+            allNodes = []
+            nodeIDs = list(range(len(allElements)))
+            # Loop over all elements:
+            for i in nodeIDs:
+                # Creating a list of class Node with a node ID and an element:
+                allNodes.append(Node(i, allElements[i]))
+                nodes.writerow(allNodes[i].getNodeAsList())
+                # FIXME: The dimension features are not in the same order for all elements.
+                # TODO: The features should be normalized before learning.
             
-            # TODO: Write to edges file
-            edgesList = elemConnectionsToEdges(nodeIDs, allConnections)
-            intEdgesList = []
-            # for i in edgesList:
-                # intEdgesList[i] = list(map(int, i))
-            edges.writerows(edgesList)
+            # Writing to Edges.csv file:
+            allEdges = nodesToEdges(allNodes)
+            # Loop over all edges:
+            for i in range(len(allEdges)):
+                edges.writerow(allEdges[i].getEdgeAsList())
         
-        nodesData = pd.read_csv(f'{projectDir}\\Nodes.csv')
-        edgesData = pd.read_csv(f'{projectDir}\\Edges.csv')
-        # src = edgesData['Src ID'].to_numpy()
-        # dst = edgesData['Dst ID'].to_numpy()
-        
-        src = [0, 0, 1]
-        dst = [1, 3, 2]
-        
-        nodeDict = {0: 'B9', 1: 'B10', 2: 'C24', 3: 'W76'}
-        
-        g = dgl.graph((src, dst))
-        
-        nxGraph = g.to_networkx()
-        nx.draw_networkx(nxGraph, with_labels=True, arrowstyle='-', node_size=1000, \
-                        node_color='#0091ea', edge_color='#607d8b', width=4.0, \
-                        labels=nodeDict, label='Model Graph')
-        plt.show()
+        # Getting the DGL graph of each model in the dataset.
+        graph = homoGraph(model, projectDir, allNodes, visualizeGraph, figSave)
 
 # ------------------------------- Main Function ------------------------------ #
 def main():
-    # Inputting directory path and number of models:
-    # print('Please type a directory path containing all projects data from Dynamo', 
-    #       'or leave empty to use the default path "~\\..\\Dynamo".')
-    # dataDir = input('Type a directory path here: ') or '~\\..\\Dynamo'
-    # print('Please enter the number of models you have in this directory.')
-    # modelCount = int(input('Type an integer number of models: '))
     workspace = os.getcwd()
     dataDir = f'{workspace}\\Dynamo'
+    Element.featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
     modelCount = 2
-    featureCount = 4
     
-    homoGraphFromElementsInfo(dataDir, modelCount, featureCount)
+    homoGraphFromElementsInfo(dataDir, modelCount)
 
 # ------------------------------- Run as Script ------------------------------ #
 if __name__ == '__main__':

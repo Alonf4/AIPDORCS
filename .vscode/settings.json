@@ -7,6 +7,7 @@
         "cuda",
         "dtype",
         "figsize",
+        "fontsize",
         "imshow",
         "logits",
         "matplotlib",
@@ -14,6 +15,8 @@
         "optim",
         "pyplot",
         "relu",
+        "savefig",
+        "suptitle",
         "Technion",
         "torchvision"
     ],
