@@ -54,7 +54,9 @@ def getElementsInfo(fileName: str,
                 case 'Beam Connections' | 'Column Connections' | \
                     'Slab Connections' | 'Wall Connections':
                     # Removing duplicates (if exist):
-                    elemConnections.append(list(set(line[1:])))
+                    connections = list(set(line[1:]))
+                    connections.sort()
+                    elemConnections.append(connections)
                 
                 case other: # other = geometric features
                     tempList.append(line[1])
