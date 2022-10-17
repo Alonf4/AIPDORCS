@@ -118,6 +118,9 @@ class Element:
     def typeCount(self):
         return Element._countDict[self.type]
 
+# ---------------------------------------------------------------------------- #
+#                               Graph Node Class                               #
+# ---------------------------------------------------------------------------- #
 class Node:
     """A class of a graph nodes, containing a node id and a structural element.
     
@@ -140,6 +143,9 @@ class Node:
         featureCount = self.element.homoFeatureCount()
         return [self.nodeID] + [self.element.id] + self.element.features[:featureCount]
 
+# ---------------------------------------------------------------------------- #
+#                               Graph Edge Class                               #
+# ---------------------------------------------------------------------------- #
 class Edge:
     """A class of a graph edge, containing an edge id, a source node and a destination node.
     
