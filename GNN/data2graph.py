@@ -142,7 +142,7 @@ def nodesToEdges(allNodes: list[Node],
 
 # -------------------- Visualizing a Graph using Networkx -------------------- #
 def nxGraphVisualization(model: int, 
-                         projectDir: str, 
+                         DatabaseProjDir: str, 
                          graph, 
                          nodeDict:dict, 
                          figSave:bool=True, 
@@ -152,7 +152,7 @@ def nxGraphVisualization(model: int,
     Parameters
     ----------
         ``model (int)``: Project number for the graph title.
-        ``projectDir (str)``: Path of the project directory for saving the graph figure.
+        ``DatabaseProjDir (str)``: Path of the project directory for saving the graph figure.
         ``graph (_type_)``: A DGL graph object.
         ``nodeDict (dict)``: A dictionary of labels for the graph nodes.
         ``figSave (bool, optional)``: Whether or not to save the figure, True by default.
@@ -171,7 +171,7 @@ def nxGraphVisualization(model: int,
     
     # Saving the graph figure if requested, otherwise just showing it:
     if figSave:
-        plt.savefig(f'{projectDir}\graph.png', dpi=300)
+        plt.savefig(f'{DatabaseProjDir}\graph.png', dpi=300)
     else:
         plt.show()
     
@@ -182,7 +182,7 @@ def nxGraphVisualization(model: int,
 
 # --------- Creating an Homogenous Graph from Nodes.csv and Edges.csv -------- #
 def homoGraph(model: int, 
-              projectDir: str, 
+              DatabaseProjDir: str, 
               allNodes: list[Node], 
               visualizeGraph:bool = True, 
               figSave:bool=True, 
@@ -192,7 +192,7 @@ def homoGraph(model: int,
     Parameters
     ----------
         ``model (int)``: Project number.
-        ``projectDir (str)``: Path of the project directory to get the graph data from.
+        ``DatabaseProjDir (str)``: A path of the project directory to get the graph data from.
         ``allNodes (list[Node])``: A list of all nodes in the graph.
         ``visualizeGraph (bool, optional)``: Whether or not to visualize the graph, True by default.
         ``figSave (bool, optional)``: Whether or not to save the graph figure, True by default.
@@ -204,8 +204,8 @@ def homoGraph(model: int,
     """
     startTime = timeit.default_timer()
     # Reading graph data from CSV files:
-    nodesData = pd.read_csv(f'{projectDir}\\Nodes.csv')
-    edgesData = pd.read_csv(f'{projectDir}\\Edges.csv')
+    nodesData = pd.read_csv(f'{DatabaseProjDir}\\Nodes.csv')
+    edgesData = pd.read_csv(f'{DatabaseProjDir}\\Edges.csv')
     src = edgesData['Src ID'].to_numpy()
     dst = edgesData['Dst ID'].to_numpy()
     
@@ -219,7 +219,7 @@ def homoGraph(model: int,
         nodeDict = {}
         for node in allNodes:
             nodeDict[node.nodeID] = node.element.id
-        nxGraphVisualization(model, projectDir, graph, nodeDict, figSave, timeDebug)
+        nxGraphVisualization(model, DatabaseProjDir, graph, nodeDict, figSave, timeDebug)
     
     # Timing function debug:
     finishTime = timeit.default_timer()
@@ -229,7 +229,8 @@ def homoGraph(model: int,
     return graph
 
 # -------- Creating Nodes.csv and Edges.csv from Elements Information -------- #
-def homoGraphFromElementsInfo(dataDir: str, 
+def homoGraphFromElementsInfo(dynamoDir: str, 
+                              dataDir: str, 
                               modelCount: int, 
                               gPrint:bool = True, 
                               visualizeGraph:bool = True, 
@@ -239,7 +240,8 @@ def homoGraphFromElementsInfo(dataDir: str,
     
     Parameters
     ----------
-        ``dataDir (str)``: A path to a directory containing all elements information from all models.
+        ``dynamoDir (str)``: A path to a directory containing all elements information from all models.
+        ``dataDir (str)``: A path to a directory to save all graph information for each model.
         ``modelCount (int)``: The number of models in the dataset.
         ``gPrint (bool, optional)``: Whether or not to print each graph information, True by default.
         ``visualizeGraph (bool, optional)``: Whether or not to visualize each graph, True by default.
@@ -255,10 +257,14 @@ def homoGraphFromElementsInfo(dataDir: str,
     
     # Loop over models data from Dynamo:
     for model in range(1, modelCount+1):
-        projectDir = f'{dataDir}\\Project {model:03d}'
+        DynamoProjDir = f'{dynamoDir}\\Project {model:03d}'
+        DatabaseProjDir = f'{dataDir}\\Project {model:03d}'
+        # Create a new directory if it doesn't already exist:
+        if not os.path.isdir(DatabaseProjDir):
+            os.makedirs(DatabaseProjDir)
         
-        with open(f'{projectDir}\\Nodes.csv', 'w') as csvFile1, \
-            open(f'{projectDir}\\Edges.csv', 'w') as csvFile2:
+        with open(f'{DatabaseProjDir}\\Nodes.csv', 'w') as csvFile1, \
+            open(f'{DatabaseProjDir}\\Edges.csv', 'w') as csvFile2:
             nodes = csv.writer(csvFile1)
             edges = csv.writer(csvFile2)
             # Writing header to CSV files:
@@ -268,7 +274,7 @@ def homoGraphFromElementsInfo(dataDir: str,
             allElements = []
             # Loop over element types:
             for elementType in elementTypes:
-                fileName = f'{projectDir}\\{elementType}sData.csv'
+                fileName = f'{DynamoProjDir}\\{elementType}sData.csv'
                 elemList = getElementsInfo(fileName, timeDebug)
                 # Getting all elements' information from all element types:
                 allElements.extend(elemList)
@@ -291,7 +297,7 @@ def homoGraphFromElementsInfo(dataDir: str,
                 edges.writerow(allEdges[i].getEdgeAsList())
         
         # Getting the DGL graph of each model in the dataset.
-        graph = homoGraph(model, projectDir, allNodes, visualizeGraph, figSave, timeDebug)
+        graph = homoGraph(model, DatabaseProjDir, allNodes, visualizeGraph, figSave, timeDebug)
         # TODO: Add the node features to the graph.
         
         if gPrint:
@@ -313,12 +319,13 @@ def main():
     # Initial data for running the script:
     startTime = timeit.default_timer()
     workspace = os.getcwd()
-    dataDir = f'{workspace}\\Dynamo'
+    dynamoDir = f'{workspace}\\Dynamo'
+    dataDir = f'{workspace}\\Database'
     Element.featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
     modelCount = 2
     
     # Calling the functions:
-    homoGraphFromElementsInfo(dataDir, modelCount, visualizeGraph=False, timeDebug=False)
+    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=True, timeDebug=False)
     
     # Timing the script:
     finishTime = timeit.default_timer()
