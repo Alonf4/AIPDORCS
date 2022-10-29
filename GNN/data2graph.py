@@ -249,6 +249,7 @@ def homoGraphFromElementsInfo(dynamoDir: str,
         ``timeDebug (bool, optional)``: Whether or not to print function timing for debug, False by default.
     """
     startTime = timeit.default_timer()
+    graphList = []
     # List of structural element types possible:
     elementTypes = list(Element.featuresDict.keys())
     
@@ -299,6 +300,7 @@ def homoGraphFromElementsInfo(dynamoDir: str,
         # Getting the DGL graph of each model in the dataset.
         graph = homoGraph(model, DatabaseProjDir, allNodes, visualizeGraph, figSave, timeDebug)
         # TODO: Add the node features to the graph.
+        graphList.append(graph)
         
         if gPrint:
             print(f'    Graph Information of Project {model:03d}:')
@@ -308,6 +310,8 @@ def homoGraphFromElementsInfo(dynamoDir: str,
             print(f'    Is the graph homogenous: {graph.is_homogeneous}')
             print(f'    The graph device is: {graph.device}')
             print('==================================================')
+    
+    dgl.save_graphs(f'{dataDir}\\dataset.bin', graphList)
     
     # Timing function debug:
     finishTime = timeit.default_timer()
@@ -325,7 +329,7 @@ def main():
     modelCount = 2
     
     # Calling the functions:
-    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=True, timeDebug=False)
+    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=False, timeDebug=False)
     
     # Timing the script:
     finishTime = timeit.default_timer()
