@@ -1,6 +1,4 @@
-# AIPDORCS
-
-## Artificially Intelligent Preliminary Design of Reinforced Concrete Structures
+![AIPDORCS](readme/baner.jpg)
 
 ##### Visit the research website here: https://alonf4.wixsite.com/aipdorcs
 
