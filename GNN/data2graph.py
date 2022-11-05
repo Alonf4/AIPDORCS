@@ -208,13 +208,15 @@ def homoGraph(model: int,
     edgesData = pd.read_csv(f'{DatabaseProjDir}\\Edges.csv')
     src = edgesData['Src ID'].to_numpy()
     dst = edgesData['Dst ID'].to_numpy()
-    # feature = nodesData['Dim1','Dim2','Dim3','Volume'].to_numpy() # FIXME
+    features = nodesData.loc[:, ['Dim 1','Dim 2','Dim 3','Volume']].to_numpy()
     
     # Creating an homogenous DGL graph:
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     graph = dgl.graph((src, dst), device = device)
     graph = dgl.add_reverse_edges(graph)
-    # graph.ndata['feat'] = feature # FIXME
+    features = torch.from_numpy(features).to(device)
+    print(features.device)
+    graph.ndata['feat'] = features # REVIEW: Check if getting node features correctly.
     
     # If graph visualization is enabled, make a figure:
     if visualizeGraph:
@@ -315,6 +317,7 @@ def homoGraphFromElementsInfo(dynamoDir: str,
             print(f'    The graph device is: {graph.device}')
             print('==================================================')
     
+    # FIXME: Add the actual labels from the Engineers' Challenge:
     graphLabels = {"glabel": torch.tensor([0, 1])}
     dgl.save_graphs(f'{dataDir}\\dataset.bin', graphList, graphLabels)
     
