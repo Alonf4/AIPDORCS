@@ -35,7 +35,10 @@ def main():
     lr = 0.005
     
     # Getting the graphs from our database:
-    dataset = dgl.load_graphs(datasetDir)[0]
+    dataset, labels = dgl.load_graphs(datasetDir)
+    print(f"First graph's label: {labels['glabel'][0]}") # NOTE: Getting labels.
+    # TODO: The graph features should also be in the labels argument.
+    print(f"First graph's node features: {dataset[0].nodes()}")
     
     num_examples = len(dataset)
     num_train = int(num_examples * 0.8)
@@ -63,25 +66,24 @@ def main():
     print(graphs)
     
     # Create the model with given dimensions
-    model = GCN(dataset.dim_nfeats, 16, dataset.gclasses)
-    # FIXME - Need to add node features first
-    #FIXME - Need to add labels first
+    model = GCN(4, 16, 1)
+    # NOTE: 4 = Number of input features, 16 = Number of hidden features, 1 = Number of graph types
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-
+    
     for epoch in range(20):
-        for batched_graph, labels in train_dataloader:
-            pred = model(batched_graph, batched_graph.ndata['attr'].float())
-            loss = F.cross_entropy(pred, labels)
+        for i, batched_graph in enumerate(train_dataloader):
+            pred = model(batched_graph, batched_graph.ndata['feat'].float())
+            loss = F.cross_entropy(pred, labels['glabel'][i]) # FIXME: Maybe add more graphs?
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
 
     num_correct = 0
     num_tests = 0
-    for batched_graph, labels in test_dataloader:
-        pred = model(batched_graph, batched_graph.ndata['attr'].float())
-        num_correct += (pred.argmax(1) == labels).sum().item()
-        num_tests += len(labels)
+    for i, batched_graph in enumerate(test_dataloader):
+        pred = model(batched_graph, batched_graph.ndata['feat'].float())
+        num_correct += (pred.argmax(1) == labels['glabel'][i]).sum().item()
+        num_tests += len(labels['glabel'][i])
 
     print('Test accuracy:', num_correct / num_tests)
 
