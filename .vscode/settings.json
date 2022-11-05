@@ -8,6 +8,7 @@
         "dtype",
         "figsize",
         "fontsize",
+        "glabel",
         "imshow",
         "logits",
         "matplotlib",
