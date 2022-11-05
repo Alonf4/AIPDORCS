@@ -208,11 +208,13 @@ def homoGraph(model: int,
     edgesData = pd.read_csv(f'{DatabaseProjDir}\\Edges.csv')
     src = edgesData['Src ID'].to_numpy()
     dst = edgesData['Dst ID'].to_numpy()
+    # feature = nodesData['Dim1','Dim2','Dim3','Volume'].to_numpy() # FIXME
     
     # Creating an homogenous DGL graph:
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     graph = dgl.graph((src, dst), device = device)
     graph = dgl.add_reverse_edges(graph)
+    # graph.ndata['feat'] = feature # FIXME
     
     # If graph visualization is enabled, make a figure:
     if visualizeGraph:
@@ -300,6 +302,8 @@ def homoGraphFromElementsInfo(dynamoDir: str,
         # Getting the DGL graph of each model in the dataset.
         graph = homoGraph(model, DatabaseProjDir, allNodes, visualizeGraph, figSave, timeDebug)
         # TODO: Add the node features to the graph.
+        # TODO: Add the model labels to the graph.
+        # graph.ndata['feat'] = 
         graphList.append(graph)
         
         if gPrint:
@@ -311,7 +315,8 @@ def homoGraphFromElementsInfo(dynamoDir: str,
             print(f'    The graph device is: {graph.device}')
             print('==================================================')
     
-    dgl.save_graphs(f'{dataDir}\\dataset.bin', graphList)
+    graphLabels = {"glabel": torch.tensor([0, 1])}
+    dgl.save_graphs(f'{dataDir}\\dataset.bin', graphList, graphLabels)
     
     # Timing function debug:
     finishTime = timeit.default_timer()
