@@ -32,7 +32,7 @@ Beam ID,B2
 Beam Length,354
 Beam b,15
 Beam h,50
-Beam Volume,0.246325939597337
+Beam Volume,0.262825939597337
 Beam Connections,B1,B18,C2,B1,B18,S1
 Beam ID,B17
 Beam Length,103.543409122023
@@ -56,7 +56,7 @@ Beam ID,B18
 Beam Length,105.294322273917
 Beam b,22
 Beam h,50
-Beam Volume,0.124073754501312
+Beam Volume,0.107573754501311
 Beam Connections,B2,W42,B2,W68,S1
 Beam ID,B5
 Beam Length,410.655857465182
@@ -68,13 +68,13 @@ Beam ID,B6
 Beam Length,345.912022478463
 Beam b,15
 Beam h,50
-Beam Volume,0.246325939597338
+Beam Volume,0.262825939597339
 Beam Connections,B5,B19,C3,B5,B19,S3
 Beam ID,B19
 Beam Length,105.294322273916
 Beam b,22
 Beam h,50
-Beam Volume,0.124073754501311
+Beam Volume,0.10757375450131
 Beam Connections,B6,W52,B6,W66,S3
 Beam ID,B13
 Beam Length,283.697383020795
@@ -98,7 +98,7 @@ Beam ID,B22
 Beam Length,237.861991454257
 Beam b,22
 Beam h,65
-Beam Volume,0.340142647779593
+Beam Volume,0.340142647779592
 Beam Connections,W64,W65,S4,S17
 Beam ID,B15
 Beam Length,445.89533790748
@@ -116,7 +116,7 @@ Beam ID,B23
 Beam Length,268.274768431718
 Beam b,22
 Beam h,65
-Beam Volume,0.383632918857363
+Beam Volume,0.341323510815172
 Beam Connections,W68,W69,S1,S10
 Beam ID,B24
 Beam Length,238.613054200579
