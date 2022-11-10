@@ -55,6 +55,7 @@ def getElementsInfo(fileName: str,
                     'Slab Connections' | 'Wall Connections':
                     # Removing duplicates (if exist):
                     connections = list(set(line[1:]))
+                    connections = list(filter(None, connections))
                     connections.sort()
                     elemConnections.append(connections)
                 
@@ -334,10 +335,10 @@ def main():
     dynamoDir = f'{workspace}\\Dynamo'
     dataDir = f'{workspace}\\Database'
     Element.featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
-    modelCount = 2
+    modelCount = 20
     
     # Calling the functions:
-    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=False, timeDebug=False)
+    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=True, timeDebug=False)
     
     # Timing the script:
     finishTime = timeit.default_timer()
