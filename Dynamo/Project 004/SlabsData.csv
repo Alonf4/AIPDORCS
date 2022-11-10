@@ -1,10 +1,10 @@
 Slab ID,S1
 Slab Thickness,30
-Inner Circle Diameter,1010.95878814653
-Closest Element Diameter,1011.43829372969
+Inner Circle Diameter,1010.95717617983
+Closest Element Diameter,1011.4377839955
 Slab Volume,39.6021627660346
 Slab Perimeter,5038.0366750069
-Slab Connections,C1,C2,C3,C5,B1,B2,B3,B4,W1,B5,W25,B23,B24,S18
+Slab Connections,C1,C2,C3,C4,C5,B1,B2,B3,B4,W1,B5,W25,B23,B24,S18
 Slab ID,S2
 Slab Thickness,30
 Inner Circle Diameter,1011.11550956193
@@ -57,10 +57,10 @@ Slab Connections,C1,W6,B5,B11,C11,B12
 Slab ID,S9
 Slab Thickness,30
 Inner Circle Diameter,142.089022314137
-Closest Element Diameter,142.089022314138
-Slab Volume,1.15369973170417
-Slab Perimeter,880.843596725638
-Slab Connections,W1,W3,W25,W26,B24,B32,S3,W39,S10
+Closest Element Diameter,142.089022314137
+Slab Volume,1.15592898153211
+Slab Perimeter,881.843596725637
+Slab Connections,W1,W2,W3,W25,W26,B24,B32,S3,W39,S10
 Slab ID,S10
 Slab Thickness,30
 Inner Circle Diameter,318.537799758693
@@ -119,8 +119,8 @@ Slab Perimeter,1371.41111339608
 Slab Connections,C17,C18,C19,B17,B20,S4
 Slab ID,S18
 Slab Thickness,30
-Inner Circle Diameter,326.176088065303
-Closest Element Diameter,461.682593814595
+Inner Circle Diameter,326.176088065317
+Closest Element Diameter,461.682593814591
 Slab Volume,3.45291086324493
 Slab Perimeter,1375.96611631235
 Slab Connections,C2,C3,C4,B2,B3,S1

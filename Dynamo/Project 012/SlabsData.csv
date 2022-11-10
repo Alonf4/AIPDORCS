@@ -18,7 +18,7 @@ Inner Circle Diameter,296.792699170538
 Closest Element Diameter,296.793359052227
 Slab Volume,3.88707681313883
 Slab Perimeter,1881.42088723764
-Slab Connections,W12,B8,B9,C5,B10,B11,S2
+Slab Connections,W40,W12,B8,B9,C5,B10,B11,S2
 Slab ID,S4
 Slab Thickness,21
 Inner Circle Diameter,343.09510942735
@@ -29,15 +29,15 @@ Slab Connections,W1,W37,W38,W66,S6
 Slab ID,S5
 Slab Thickness,21
 Inner Circle Diameter,349.56069850532
-Closest Element Diameter,404.402747487621
+Closest Element Diameter,404.402716803462
 Slab Volume,2.64076094474934
-Slab Perimeter,1423.16788321168
-Slab Connections,W33,W43,B2,B6,S6
+Slab Perimeter,1423.26788321169
+Slab Connections,W5,W6,W33,W43,B2,B6,S6
 Slab ID,S6
 Slab Thickness,21
 Inner Circle Diameter,631.163033076015
 Closest Element Diameter,632.093090399406
-Slab Volume,18.7520015003188
+Slab Volume,18.7530438270036
 Slab Perimeter,6022.50364963504
 Slab Connections,W1,W5,W6,W37,W38,W66,W7,W8,W9,W10,W11,C1,W39,W40,B1,W43,W44,W45,W46,W47,W48,S4,B6,S5,W36
 Slab ID,S7
@@ -70,4 +70,29 @@ Slab Perimeter,1271
 Slab Connections,W3,W52,W53,W68,S12
 Slab ID,S11
 Slab Thickness,21
-Inner Circle Diameter,352.234701148268
+Inner Circle Diameter,352.234678137148
+Closest Element Diameter,404.362485909066
+Slab Volume,2.64076094474935
+Slab Perimeter,1423.36788321169
+Slab Connections,W43,W19,W20,W35,B4,B7,S12
+Slab ID,S12
+Slab Thickness,21
+Inner Circle Diameter,629.528223169902
+Closest Element Diameter,629.528223169902
+Slab Volume,18.7530438270036
+Slab Perimeter,6022.60364963505
+Slab Connections,W43,W3,W19,W20,W52,W53,W68,W21,W22,W23,W24,W25,C2,W54,W55,B3,W58,W59,W60,W61,W62,S10,B7,S11,W36
+Slab ID,S13
+Slab Thickness,21
+Inner Circle Diameter,204.755545225533
+Closest Element Diameter,204.755545225532
+Slab Volume,1.31859847717779
+Slab Perimeter,1048.8151748663
+Slab Connections,W50,W51,W34,W64,W65,B5
+Slab ID,S14
+Slab Thickness,21
+Inner Circle Diameter,200.109910570057
+Closest Element Diameter,200.109810126676
+Slab Volume,3.39976068049731
+Slab Perimeter,2158.8151748663
+Slab Connections,W45,W48,W74,W49,W50,S2,W59,W62,W75,W63,W64,S8,B5,W36

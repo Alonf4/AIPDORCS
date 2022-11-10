@@ -14,13 +14,13 @@ Beam ID,B3
 Beam Length,377.306531613813
 Beam b,30
 Beam h,80
-Beam Volume,0.857535675873157
+Beam Volume,0.833535675873158
 Beam Connections,B4,B2,C3,C4,B2,B4,S1,S18
 Beam ID,B4
 Beam Length,863.132499673533
 Beam b,30
 Beam h,80
-Beam Volume,1.8995179992165
+Beam Volume,1.8795179992165
 Beam Connections,B3,B23,B22,C4,C5,B3,B22,B23,S1
 Beam ID,B5
 Beam Length,971.885753613212
@@ -188,7 +188,7 @@ Beam ID,B32
 Beam Length,148.616655196145
 Beam b,30
 Beam h,80
-Beam Volume,0.356679972470753
+Beam Volume,0.354450722642808
 Beam Connections,W1,W2,S3,S9,S12
 Beam ID,B33
 Beam Length,148.616655196145

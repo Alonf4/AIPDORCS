@@ -2,8 +2,8 @@ Beam ID,B8
 Beam Length,300.262773722627
 Beam b,20
 Beam h,40
-Beam Volume,0.239194218978106
-Beam Connections,B10,B9,W40,B9,B10,S3
+Beam Volume,0.240210218978106
+Beam Connections,B9,W40,B9,B10,S3
 Beam ID,B9
 Beam Length,679.447669896193
 Beam b,20
@@ -14,7 +14,7 @@ Beam ID,B10
 Beam Length,339.645985401463
 Beam b,20
 Beam h,40
-Beam Volume,0.233553284671542
+Beam Volume,0.231716788321176
 Beam Connections,W40,B11,W40,B8,C5,B11,S2,S3
 Beam ID,B11
 Beam Length,339.80168449473

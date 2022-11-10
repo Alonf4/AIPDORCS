@@ -390,7 +390,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": ""
+      "Description": "Finds pole of inaccessibility for a given polygon. \r\nCalculates the visual center of a polygon (inside the polygon).\r\nBased on Vladimir Agafonkin's algorithm Polylabel.\r\nPlease note that the node doesn't work with ellipsoidal or circular surfaces."
     },
     {
       "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
@@ -1180,7 +1180,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": ""
+      "Description": "Returns all elements joined to the given element."
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
@@ -1211,7 +1211,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": ""
+      "Description": "Returns all elements joined to the given element."
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
@@ -5935,8 +5935,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -2011.8903946762648,
-        "Y": 4673.9778027720986
+        "X": -2011.8903946762584,
+        "Y": 4976.1996320068774
       },
       {
         "ShowGeometry": true,
@@ -5945,7 +5945,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2933.1096053237443,
+        "X": 2933.1096053237425,
         "Y": 3036.4789685990922
       },
       {
@@ -5955,7 +5955,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 1992.5856352657586
       },
       {
@@ -5965,7 +5965,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 3028.4456352657635
       },
       {
@@ -5975,8 +5975,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1745.8903946762557,
-        "Y": 4673.9778027720986
+        "X": -1745.8903946762584,
+        "Y": 4976.1996320068774
       },
       {
         "ShowGeometry": true,
@@ -5985,8 +5985,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -78.890394676256165,
-        "Y": 4742.945635265748
+        "X": -78.890394676258438,
+        "Y": 4843.445635265748
       },
       {
         "ShowGeometry": true,
@@ -5995,8 +5995,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1471.8903946762557,
-        "Y": 4314.3723019324179
+        "X": -1471.8903946762584,
+        "Y": 4733.445635265758
       },
       {
         "ShowGeometry": true,
@@ -6005,8 +6005,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -701.89039467625526,
-        "Y": 4234.3723019324179
+        "X": -701.89039467625844,
+        "Y": 4653.445635265758
       },
       {
         "ShowGeometry": true,
@@ -6015,8 +6015,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -426.89039467625526,
-        "Y": 4262.3723019324179
+        "X": -426.89039467625844,
+        "Y": 4681.445635265758
       },
       {
         "ShowGeometry": true,
@@ -6025,8 +6025,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -701.89039467625526,
-        "Y": 4342.3723019324179
+        "X": -701.89039467625844,
+        "Y": 4761.445635265758
       },
       {
         "ShowGeometry": true,
@@ -6035,8 +6035,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -78.890394676256165,
-        "Y": 4314.3723019324179
+        "X": -78.890394676258438,
+        "Y": 4707.445635265758
       },
       {
         "ShowGeometry": true,
@@ -6045,7 +6045,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5435.1117602774248,
+        "X": 5435.1117602774229,
         "Y": 4527.1589685990912
       },
       {
@@ -6055,8 +6055,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2594.1096053237447,
-        "Y": 4354.945635265748
+        "X": 2594.109605323742,
+        "Y": 4354.9456352657517
       },
       {
         "ShowGeometry": true,
@@ -6065,7 +6065,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 331.10960532374384,
+        "X": 331.109605323742,
         "Y": 4322.0123019324183
       },
       {
@@ -6075,7 +6075,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 331.10960532374384,
+        "X": 331.109605323742,
         "Y": 4430.0123019324183
       },
       {
@@ -6085,8 +6085,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -78.890394676256165,
-        "Y": 4448.945635265748
+        "X": -78.890394676258438,
+        "Y": 4348.445635265748
       },
       {
         "ShowGeometry": true,
@@ -6095,8 +6095,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1746.1096053237438,
-        "Y": 4328.2256352657578
+        "X": 1746.109605323742,
+        "Y": 4328.2256352657514
       },
       {
         "ShowGeometry": true,
@@ -6105,8 +6105,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1981.1096053237447,
-        "Y": 4332.4389685990882
+        "X": 1981.109605323742,
+        "Y": 4332.4389685990845
       },
       {
         "ShowGeometry": true,
@@ -6115,7 +6115,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1981.1096053237447,
+        "X": 1981.109605323742,
         "Y": 4582.945635265748
       },
       {
@@ -6125,7 +6125,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 331.10960532374384,
+        "X": 331.109605323742,
         "Y": 4701.945635265748
       },
       {
@@ -6135,7 +6135,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 331.10960532374384,
+        "X": 331.109605323742,
         "Y": 4593.945635265748
       },
       {
@@ -6145,7 +6145,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 3153.1096053237443,
+        "X": 3153.1096053237425,
         "Y": 4429.945635265748
       },
       {
@@ -6155,7 +6155,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1718.1096053237438,
+        "X": 1718.109605323742,
         "Y": 4608.945635265748
       },
       {
@@ -6165,7 +6165,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 3443.1096053237447,
+        "X": 3443.1096053237429,
         "Y": 4496.945635265758
       },
       {
@@ -6175,7 +6175,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 3153.1096053237443,
+        "X": 3153.1096053237425,
         "Y": 4589.945635265758
       },
       {
@@ -6185,7 +6185,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 3235.1096053237443,
+        "X": 3235.1096053237425,
         "Y": 3036.4789685990922
       },
       {
@@ -6195,7 +6195,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5731.1096053237443,
+        "X": 5731.1096053237425,
         "Y": 1992.5856352657586
       },
       {
@@ -6205,7 +6205,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5699.1096053237443,
+        "X": 5699.1096053237425,
         "Y": 3028.4456352657635
       },
       {
@@ -6215,7 +6215,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4225.1096053237443,
+        "X": 4225.1096053237425,
         "Y": 3568.9456352657621
       },
       {
@@ -6225,7 +6225,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 3509.1096053237443,
+        "X": 3509.1096053237425,
         "Y": 3040.6923019324222
       },
       {
@@ -6235,7 +6235,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4552.1096053237443,
+        "X": 4552.1096053237425,
         "Y": 2682.3056352657622
       },
       {
@@ -6245,7 +6245,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5973.1096053237443,
+        "X": 5973.1096053237425,
         "Y": 3112.9456352657635
       },
       {
@@ -6255,7 +6255,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6005.1096053237443,
+        "X": 6005.1096053237425,
         "Y": 1826.0923019324186
       },
       {
@@ -6265,7 +6265,7 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2933.1096053237443,
+        "X": 2933.1096053237425,
         "Y": 4792.8434965895058
       },
       {
@@ -6275,7 +6275,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2933.1096053237443,
+        "X": 2933.1096053237425,
         "Y": 4429.945635265748
       },
       {
@@ -6285,7 +6285,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 4347.6656352657583
       },
       {
@@ -6295,7 +6295,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 4243.2389685990884
       },
       {
@@ -6305,7 +6305,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 4217.2389685990884
       },
       {
@@ -6315,7 +6315,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5435.1117602774248,
+        "X": 5435.1117602774229,
         "Y": 4681.1589685990912
       },
       {
@@ -6325,7 +6325,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6296.1117602774248,
+        "X": 6296.1117602774229,
         "Y": 4527.1589685990912
       },
       {
@@ -6335,7 +6335,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": true,
         "Excluded": false,
-        "X": 6928.1117602774248,
+        "X": 6928.1117602774229,
         "Y": 4610.8123019324212
       },
       {
@@ -6345,7 +6345,7 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2933.1096053237443,
+        "X": 2933.1096053237425,
         "Y": 4903.5895338758355
       },
       {
@@ -6355,7 +6355,7 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2933.1096053237443,
+        "X": 2933.1096053237425,
         "Y": 4988.553939729285
       },
       {
@@ -6365,7 +6365,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 3808.025635265748
       },
       {
@@ -6375,7 +6375,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9088.1096053237452,
+        "X": 9088.1096053237434,
         "Y": 3808.025635265748
       },
       {
@@ -6385,7 +6385,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9597.1096053237452,
+        "X": 9597.1096053237434,
         "Y": 3803.4523019324183
       },
       {
@@ -6395,7 +6395,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9362.1096053237452,
+        "X": 9362.1096053237434,
         "Y": 3799.2389685990884
       },
       {
@@ -6405,7 +6405,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9597.1096053237452,
+        "X": 9597.1096053237434,
         "Y": 4041.1723019324181
       },
       {
@@ -6415,7 +6415,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9597.1096053237452,
+        "X": 9597.1096053237434,
         "Y": 3957.9589685990886
       },
       {
@@ -6425,7 +6425,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 10223.109605323745,
+        "X": 10223.109605323743,
         "Y": 3922.9589685990886
       },
       {
@@ -6435,7 +6435,7 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2933.1096053237443,
+        "X": 2933.1096053237425,
         "Y": 5059.0923019324155
       },
       {
@@ -6445,7 +6445,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5435.1117602774248,
+        "X": 5435.1117602774229,
         "Y": 4352.8742110205512
       },
       {
@@ -6455,7 +6455,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 5186.1193960202609
       },
       {
@@ -6465,7 +6465,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 5013.6669620813409
       },
       {
@@ -6475,7 +6475,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 4836.3551672472913
       },
       {
@@ -6485,7 +6485,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 4351.8789685990878
       },
       {
@@ -6495,8 +6495,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
-        "Y": 4092.3789685990887
+        "X": 5433.1096053237425,
+        "Y": 4092.3789685990882
       },
       {
         "ShowGeometry": true,
@@ -6505,8 +6505,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5736.1096053237443,
-        "Y": 4092.3789685990887
+        "X": 5736.1096053237425,
+        "Y": 4092.3789685990882
       },
       {
         "ShowGeometry": true,
@@ -6515,7 +6515,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6010.1096053237443,
+        "X": 6010.1096053237425,
         "Y": 4133.3789685990887
       },
       {
@@ -6525,7 +6525,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5736.1096053237443,
+        "X": 5736.1096053237425,
         "Y": 4200.3789685990887
       },
       {
@@ -6535,7 +6535,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9664.1096053237452,
+        "X": 9664.1096053237434,
         "Y": 4908.2389685990884
       },
       {
@@ -6545,7 +6545,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6373.1096053237443,
+        "X": 6373.1096053237425,
         "Y": 4133.3789685990887
       },
       {
@@ -6555,7 +6555,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 4680.2389685990884
       },
       {
@@ -6565,7 +6565,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9963.1096053237452,
+        "X": 9963.1096053237434,
         "Y": 4828.2389685990884
       },
       {
@@ -6575,8 +6575,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 7301.1096053237443,
-        "Y": 4087.2389685990888
+        "X": 7301.1096053237425,
+        "Y": 4087.2389685990884
       },
       {
         "ShowGeometry": true,
@@ -6585,7 +6585,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9664.1096053237452,
+        "X": 9664.1096053237434,
         "Y": 4774.2389685990884
       },
       {
@@ -6595,8 +6595,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 7547.1096053237443,
-        "Y": 4087.2389685990888
+        "X": 7547.1096053237425,
+        "Y": 4087.2389685990884
       },
       {
         "ShowGeometry": true,
@@ -6605,7 +6605,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6608.1096053237443,
+        "X": 6608.1096053237425,
         "Y": 4137.5923019324182
       },
       {
@@ -6615,7 +6615,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 4883.3056352657486
       },
       {
@@ -6625,7 +6625,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 5035.8789685990878
       },
       {
@@ -6635,7 +6635,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 4764.8789685990878
       },
       {
@@ -6645,7 +6645,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 5153.8789685990878
       },
       {
@@ -6655,7 +6655,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6927.1096053237443,
+        "X": 6927.1096053237425,
         "Y": 3700.1589685990884
       },
       {
@@ -6665,7 +6665,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6927.1096053237443,
+        "X": 6927.1096053237425,
         "Y": 3837.0923019324186
       },
       {
@@ -6675,7 +6675,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6287.1096053237443,
+        "X": 6287.1096053237425,
         "Y": 3837.0923019324186
       },
       {
@@ -6685,7 +6685,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 3911.0923019324186
       },
       {
@@ -6695,7 +6695,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6646.1096053237443,
+        "X": 6646.1096053237425,
         "Y": 3837.0923019324186
       },
       {
@@ -6705,7 +6705,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 3740.5856352657588
       },
       {
@@ -6715,7 +6715,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 7644.1096053237443,
+        "X": 7644.1096053237425,
         "Y": 3807.0923019324186
       },
       {
@@ -6725,7 +6725,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4552.1096053237443,
+        "X": 4552.1096053237425,
         "Y": 3235.1589685990921
       },
       {
@@ -6735,7 +6735,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4552.1096053237443,
+        "X": 4552.1096053237425,
         "Y": 3573.1589685990921
       },
       {
@@ -6745,7 +6745,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8047.1096053237443,
+        "X": 8047.1096053237425,
         "Y": 3693.3056352657586
       },
       {
@@ -6755,7 +6755,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8047.1096053237443,
+        "X": 8047.1096053237425,
         "Y": 3811.3056352657586
       },
       {
@@ -6765,7 +6765,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4552.1096053237443,
+        "X": 4552.1096053237425,
         "Y": 2791.7989685990919
       },
       {
@@ -6775,7 +6775,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4552.1096053237443,
+        "X": 4552.1096053237425,
         "Y": 3404.1589685990921
       },
       {
@@ -6785,7 +6785,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 3491.6656352657583
       },
       {
@@ -6795,7 +6795,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 3387.2389685990884
       },
       {
@@ -6805,7 +6805,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 3361.2389685990884
       },
       {
@@ -6815,7 +6815,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9618.1096053237452,
+        "X": 9618.1096053237434,
         "Y": 3422.2389685990884
       },
       {
@@ -6825,7 +6825,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 3495.8789685990887
       },
       {
@@ -6835,7 +6835,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9618.1096053237452,
+        "X": 9618.1096053237434,
         "Y": 4278.2389685990884
       },
       {
@@ -6845,7 +6845,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6298.1096053237443,
+        "X": 6298.1096053237425,
         "Y": 2642.1589685990934
       },
       {
@@ -6855,7 +6855,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6298.1096053237443,
+        "X": 6298.1096053237425,
         "Y": 2948.1589685990934
       },
       {
@@ -6865,7 +6865,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6298.1096053237443,
+        "X": 6298.1096053237425,
         "Y": 2811.7323019324235
       },
       {
@@ -6875,7 +6875,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6298.1096053237443,
+        "X": 6298.1096053237425,
         "Y": 3117.1589685990934
       },
       {
@@ -6885,7 +6885,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6298.1096053237443,
+        "X": 6298.1096053237425,
         "Y": 3455.3489095935438
       },
       {
@@ -6895,7 +6895,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 3054.6656352657583
       },
       {
@@ -6905,7 +6905,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 2950.2389685990884
       },
       {
@@ -6915,7 +6915,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 2924.2389685990884
       },
       {
@@ -6925,7 +6925,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9618.1096053237452,
+        "X": 9618.1096053237434,
         "Y": 2985.2389685990884
       },
       {
@@ -6935,7 +6935,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 3058.8789685990887
       },
       {
@@ -6945,7 +6945,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6298.1096053237443,
+        "X": 6298.1096053237425,
         "Y": 3284.3995276787437
       },
       {
@@ -6955,7 +6955,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6681.1096053237443,
+        "X": 6681.1096053237425,
         "Y": 1661.3056352657586
       },
       {
@@ -6965,7 +6965,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6681.1096053237443,
+        "X": 6681.1096053237425,
         "Y": 1830.3056352657586
       },
       {
@@ -6975,7 +6975,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6005.1096053237443,
+        "X": 6005.1096053237425,
         "Y": 1996.7989685990885
       },
       {
@@ -6985,7 +6985,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6681.1096053237443,
+        "X": 6681.1096053237425,
         "Y": 2117.3056352657586
       },
       {
@@ -6995,7 +6995,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6681.1096053237443,
+        "X": 6681.1096053237425,
         "Y": 1999.3056352657586
       },
       {
@@ -7005,7 +7005,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6681.1096053237443,
+        "X": 6681.1096053237425,
         "Y": 2235.3056352657586
       },
       {
@@ -7015,7 +7015,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 6681.1096053237443,
+        "X": 6681.1096053237425,
         "Y": 2404.3056352657586
       },
       {
@@ -7025,7 +7025,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 2617.6656352657583
       },
       {
@@ -7035,7 +7035,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 8822.1096053237452,
+        "X": 8822.1096053237434,
         "Y": 2513.2389685990884
       },
       {
@@ -7045,7 +7045,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 2487.2389685990884
       },
       {
@@ -7055,7 +7055,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9618.1096053237452,
+        "X": 9618.1096053237434,
         "Y": 2548.2389685990884
       },
       {
@@ -7065,7 +7065,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 9042.1096053237452,
+        "X": 9042.1096053237434,
         "Y": 2621.8789685990887
       },
       {
@@ -7075,7 +7075,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 5433.1096053237443,
+        "X": 5433.1096053237425,
         "Y": 5356.3133418514308
       },
       {
@@ -7085,7 +7085,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 633.10960532374384,
+        "X": 633.109605323742,
         "Y": 4337.0123019324183
       },
       {
@@ -7095,7 +7095,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 597.10960532374384,
+        "X": 597.109605323742,
         "Y": 4608.945635265748
       },
       {
@@ -7105,8 +7105,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1126.8903946762557,
-        "Y": 4234.3723019324179
+        "X": -1126.8903946762584,
+        "Y": 4653.445635265758
       },
       {
         "ShowGeometry": true,
@@ -7115,8 +7115,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -1471.8903946762557,
-        "Y": 4180.3723019324179
+        "X": -1471.8903946762584,
+        "Y": 4599.445635265758
       },
       {
         "ShowGeometry": true,
@@ -7125,7 +7125,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 984.10960532374384,
+        "X": 984.109605323742,
         "Y": 4337.0123019324183
       },
       {
@@ -7135,7 +7135,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1329.1096053237438,
+        "X": 1329.109605323742,
         "Y": 4337.0123019324183
       },
       {
@@ -7145,7 +7145,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 948.10960532374384,
+        "X": 948.109605323742,
         "Y": 4608.945635265748
       },
       {
@@ -7155,7 +7155,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1293.1096053237438,
+        "X": 1293.109605323742,
         "Y": 4608.945635265748
       }
     ],
@@ -7174,13 +7174,13 @@
           "f9570cb30688445a8bd293a22fd4954e",
           "00bbcc39c9914c3d9694a028bc485ad8"
         ],
-        "Left": 2923.1096053237443,
+        "Left": 2923.1096053237425,
         "Top": 2629.3056352657622,
         "Width": 2400.0,
         "Height": 1097.8533333333298,
         "FontSize": 36.0,
         "InitialTop": 2682.3056352657622,
-        "InitialHeight": 1035.85333333333,
+        "InitialHeight": 1035.8533333333298,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -7199,7 +7199,7 @@
           "e5307792e75241cdacef016a0c53fdf9",
           "6d7c3fd291cf40a6b618148e19c52e7a"
         ],
-        "Left": 5423.1096053237443,
+        "Left": 5423.1096053237425,
         "Top": 1608.3056352657586,
         "Width": 2029.0,
         "Height": 950.0,
@@ -7223,13 +7223,13 @@
           "7d9ea0fea79e401698482beea7384e71",
           "488d9c1576894e60bdb6c93475d3bd95"
         ],
-        "Left": 5423.1096053237443,
+        "Left": 5423.1096053237425,
         "Top": 2589.1589685990934,
         "Width": 1646.0,
         "Height": 1020.1899409944504,
         "FontSize": 36.0,
         "InitialTop": 2642.1589685990934,
-        "InitialHeight": 958.189940994454,
+        "InitialHeight": 958.18994099445035,
         "TextblockHeight": 43.0,
         "Background": "#FFFF7BAC"
       },
@@ -7242,13 +7242,13 @@
           "e385f774d7ed419e956358d9f33784dd",
           "f038fd4aa6864f1681226130e51a9fae"
         ],
-        "Left": 2923.1096053237443,
+        "Left": 2923.1096053237425,
         "Top": 4739.8434965895058,
         "Width": 424.0,
         "Height": 387.24880534290969,
         "FontSize": 36.0,
         "InitialTop": 4792.8434965895058,
-        "InitialHeight": 411.248805342912,
+        "InitialHeight": 411.24880534290969,
         "TextblockHeight": 43.0,
         "Background": "#FF48B9FF"
       },
@@ -7268,13 +7268,13 @@
           "532c57038d8e43a79629c023ab38c798",
           "63121fa2d66d48a59f96b0df77e84e04"
         ],
-        "Left": -2021.8903946762648,
-        "Top": 4127.3723019324179,
-        "Width": 2243.0000000000086,
-        "Height": 708.57333333333008,
+        "Left": -2021.8903946762584,
+        "Top": 4295.445635265748,
+        "Width": 2243.0,
+        "Height": 773.75399674112941,
         "FontSize": 36.0,
-        "InitialTop": 4180.3723019324179,
-        "InitialHeight": 707.573333333331,
+        "InitialTop": 4348.445635265748,
+        "InitialHeight": 707.57333333333008,
         "TextblockHeight": 43.0,
         "Background": "#FFBB87C6"
       },
@@ -7291,9 +7291,9 @@
           "59e7692750e3494c890763ccdcab5dee",
           "5d2bd4a0517c4762a761fcb0dde69e87"
         ],
-        "Left": 321.10960532374384,
+        "Left": 321.109605323742,
         "Top": 4269.0123019324183,
-        "Width": 2502.0000000000009,
+        "Width": 2502.0,
         "Height": 229.0,
         "FontSize": 36.0,
         "InitialTop": 4322.0123019324183,
@@ -7313,9 +7313,9 @@
           "8b1ccf8ba3aa489d94b80b1904af667a",
           "62a7f4ac40524c22aaabc0a65c2cc6ba"
         ],
-        "Left": 321.10960532374384,
+        "Left": 321.109605323742,
         "Top": 4529.945635265748,
-        "Width": 1889.0000000000009,
+        "Width": 1889.0,
         "Height": 240.0,
         "FontSize": 36.0,
         "InitialTop": 4582.945635265748,
@@ -7332,13 +7332,13 @@
           "006b35ab8a3448639b8973835287f547",
           "98cac1389e73474e8238c40adec22b43"
         ],
-        "Left": 2923.1096053237443,
+        "Left": 2923.1096053237425,
         "Top": 4333.945635265748,
         "Width": 661.00000000000045,
         "Height": 375.00000000001,
         "FontSize": 36.0,
         "InitialTop": 4429.945635265748,
-        "InitialHeight": 305.000000000001,
+        "InitialHeight": 305.00000000001,
         "TextblockHeight": 86.0,
         "Background": "#FFD4B6DB"
       },
@@ -7356,13 +7356,13 @@
           "7ba40b7d5be142fc8e03ec1fe45fb539",
           "c5e95cf2d3394f3e88aa4db1a895e154"
         ],
-        "Left": 5423.1096053237443,
+        "Left": 5423.1096053237425,
         "Top": 4299.8742110205512,
         "Width": 1797.0021549536805,
         "Height": 1210.4391308308795,
         "FontSize": 36.0,
         "InitialTop": 4352.8742110205512,
-        "InitialHeight": 1148.43913083088,
+        "InitialHeight": 1148.4391308308795,
         "TextblockHeight": 43.0,
         "Background": "#FFBB87C6"
       },
@@ -7376,13 +7376,13 @@
           "781ef654f6aa4edfae7900f0290ecaf0",
           "d9d1bd2cdb0444ee99e29b583d991956"
         ],
-        "Left": 8812.1096053237452,
+        "Left": 8812.1096053237434,
         "Top": 4164.2389685990884,
         "Width": 1007.0,
         "Height": 432.42666666666992,
         "FontSize": 36.0,
         "InitialTop": 4217.2389685990884,
-        "InitialHeight": 279.640000000001,
+        "InitialHeight": 279.63999999999942,
         "TextblockHeight": 43.0,
         "Background": "#FFBB87C6"
       },
@@ -7398,13 +7398,13 @@
           "3a42085514b746b48dc35cc133c34b1d",
           "a827639788ae43978358394bcceae7dd"
         ],
-        "Left": 8812.1096053237452,
+        "Left": 8812.1096053237434,
         "Top": 3746.2389685990884,
         "Width": 1691.0,
         "Height": 387.93333333332976,
         "FontSize": 36.0,
         "InitialTop": 3799.2389685990884,
-        "InitialHeight": 386.933333333334,
+        "InitialHeight": 386.93333333332976,
         "TextblockHeight": 43.0,
         "Background": "#FF71C6A8"
       },
@@ -7421,13 +7421,13 @@
           "d808b67278a84b7bb1510f022f6b891b",
           "3d3029727f5a41a9890acf237efa8d9f"
         ],
-        "Left": 5423.1096053237443,
-        "Top": 4034.2389685990888,
+        "Left": 5423.1096053237425,
+        "Top": 4034.2389685990884,
         "Width": 2269.0,
-        "Height": 234.13999999999987,
+        "Height": 234.14000000000033,
         "FontSize": 36.0,
-        "InitialTop": 4087.2389685990888,
-        "InitialHeight": 258.139999999999,
+        "InitialTop": 4087.2389685990884,
+        "InitialHeight": 258.13999999999987,
         "TextblockHeight": 43.0,
         "Background": "#FF71C6A8"
       },
@@ -7444,13 +7444,13 @@
           "f24336478e8b407ea57cb6849379c777",
           "c6292904d19d4c18a65fe878b599c937"
         ],
-        "Left": 8812.1096053237452,
+        "Left": 8812.1096053237434,
         "Top": 4627.2389685990884,
         "Width": 1352.0,
         "Height": 629.63999999999942,
         "FontSize": 36.0,
         "InitialTop": 4680.2389685990884,
-        "InitialHeight": 618.639999999999,
+        "InitialHeight": 618.63999999999942,
         "TextblockHeight": 43.0,
         "Background": "#FF48B9FF"
       },
@@ -7468,13 +7468,13 @@
           "3e0ebf0cd1474a02bf84cc3735b1a0cb",
           "11d33a41212847008243c9ee2dde7923"
         ],
-        "Left": 5423.1096053237443,
+        "Left": 5423.1096053237425,
         "Top": 3640.3056352657586,
-        "Width": 3289.0000000000009,
+        "Width": 3288.9999999999991,
         "Height": 363.78666666666004,
         "FontSize": 36.0,
         "InitialTop": 3693.3056352657586,
-        "InitialHeight": 362.786666666667,
+        "InitialHeight": 362.78666666666004,
         "TextblockHeight": 43.0,
         "Background": "#FFE8F7AD"
       },
@@ -7488,13 +7488,13 @@
           "d263c160ddf647ed97ea195db8b1319d",
           "d4254c2d353e45fd8e1a4b62bcfa2f0c"
         ],
-        "Left": 8812.1096053237452,
+        "Left": 8812.1096053237434,
         "Top": 3308.2389685990884,
         "Width": 1007.0,
         "Height": 406.42666666666992,
         "FontSize": 36.0,
         "InitialTop": 3361.2389685990884,
-        "InitialHeight": 279.64,
+        "InitialHeight": 279.64000000000033,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -7508,13 +7508,13 @@
           "a8e1a42ab3814017bfe5e6ae5797d45b",
           "116b94222a4945288815d75d73e5ffeb"
         ],
-        "Left": 8812.1096053237452,
+        "Left": 8812.1096053237434,
         "Top": 2871.2389685990884,
         "Width": 1007.0,
         "Height": 406.42666666666992,
         "FontSize": 36.0,
         "InitialTop": 2924.2389685990884,
-        "InitialHeight": 279.64,
+        "InitialHeight": 279.64000000000033,
         "TextblockHeight": 43.0,
         "Background": "#FFFF7BAC"
       },
@@ -7528,19 +7528,19 @@
           "b83c463f993a465e90497d7eaf721c44",
           "b9144bec32bf4e968f52cf619721f195"
         ],
-        "Left": 8812.1096053237452,
+        "Left": 8812.1096053237434,
         "Top": 2434.2389685990884,
         "Width": 1007.0,
         "Height": 406.42666666666992,
         "FontSize": 36.0,
         "InitialTop": 2487.2389685990884,
-        "InitialHeight": 279.64,
+        "InitialHeight": 279.64000000000033,
         "TextblockHeight": 43.0,
         "Background": "#FFFFAA45"
       }
     ],
-    "X": 321.45542740822862,
-    "Y": 31.245937294243276,
-    "Zoom": 0.11167847778018566
+    "X": -3793.2188542152589,
+    "Y": -6668.1920439389387,
+    "Zoom": 1.4022831087172052
   }
 }

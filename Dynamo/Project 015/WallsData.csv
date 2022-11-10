@@ -189,7 +189,7 @@ Wall Height,299.999999999983
 Wall Width,20
 Wall Length,1251.99339537676
 Wall Volume,7.57196037226015
-Wall Connections,W30,,,
+Wall Connections,W30,S4,,,
 Wall ID,W30
 Wall Height,299.999999999983
 Wall Width,20
@@ -279,7 +279,7 @@ Wall Height,299.999999999983
 Wall Width,20
 Wall Length,301.932227559291
 Wall Volume,1.81159336535564
-Wall Connections,W42,W44,S4,S15,,
+Wall Connections,W42,W44,S4,S9,S15,,
 Wall ID,W44
 Wall Height,299.999999999983
 Wall Width,20
@@ -417,7 +417,7 @@ Wall Height,299.999999999983
 Wall Width,20
 Wall Length,1251.99339537676
 Wall Volume,7.57196037226015
-Wall Connections,W66,,,
+Wall Connections,W66,S3,,,
 Wall ID,W66
 Wall Height,299.999999999983
 Wall Width,20
@@ -597,7 +597,7 @@ Wall Height,299.999999999983
 Wall Width,20
 Wall Length,639.583458420893
 Wall Volume,3.77750075052514
-Wall Connections,W89,S15,S16,,,
+Wall Connections,W89,S15,S16,S17,,,
 Wall ID,W105
 Wall Height,299.999999999983
 Wall Width,15

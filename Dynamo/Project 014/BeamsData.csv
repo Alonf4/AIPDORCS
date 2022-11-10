@@ -74,8 +74,8 @@ Beam ID,B13
 Beam Length,408.117680826636
 Beam b,20
 Beam h,50
-Beam Volume,0.388117680826644
-Beam Connections,B15,B14,C5,C6,B14,B15,S3
+Beam Volume,0.387241651402324
+Beam Connections,B15,B14,C5,C6,B14,B15,S3,S7
 Beam ID,B14
 Beam Length,435.273823191732
 Beam b,20
@@ -86,8 +86,8 @@ Beam ID,B15
 Beam Length,340.347206276311
 Beam b,20
 Beam h,50
-Beam Volume,0.320347206276317
-Beam Connections,B13,C6,C7,B13,S3
+Beam Volume,0.319624143162818
+Beam Connections,B13,C6,C7,B13,S3,S7
 Beam ID,B16
 Beam Length,102.726722979954
 Beam b,20

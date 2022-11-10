@@ -3,13 +3,13 @@ Wall Height,412.499999999983
 Wall Width,25
 Wall Length,549.166156771677
 Wall Volume,5.81796349170767
-Wall Connections,W16,B33,S11,S12,S14,,,
+Wall Connections,W16,B33,S4,S11,S12,S14,,,
 Wall ID,W16
 Wall Height,412.499999999983
 Wall Width,30
 Wall Length,604.483804440752
 Wall Volume,7.48048707995399
-Wall Connections,W1,W2,B32,B33,S12,,
+Wall Connections,W1,W2,B32,B33,S4,S12,,
 Wall ID,W2
 Wall Height,412.499999999983
 Wall Width,25

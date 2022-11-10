@@ -175,7 +175,7 @@ def nxGraphVisualization(model: int,
         plt.savefig(f'{DatabaseProjDir}\graph.png', dpi=300)
     else:
         plt.show()
-    
+    # FIXME: Each new graph includes the previous graph nodes for some reason.
     # Timing function debug:
     finishTime = timeit.default_timer()
     if timeDebug:

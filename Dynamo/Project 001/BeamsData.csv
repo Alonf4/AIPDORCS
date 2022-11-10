@@ -9,7 +9,7 @@ Beam Length,139.047993957113
 Beam b,15
 Beam h,80
 Beam Volume,0.166857592748539
-Beam Connections,W74,W75,S18
+Beam Connections,W74,W75,S18,S16
 Beam ID,B11
 Beam Length,149.818799909703
 Beam b,15
@@ -110,7 +110,7 @@ Beam ID,B16
 Beam Length,445.895337907478
 Beam b,20
 Beam h,70
-Beam Volume,0.596253473070479
+Beam Volume,0.591994519691399
 Beam Connections,W54,W9,W9,W54,S9,S10,S11
 Beam ID,B23
 Beam Length,268.274768431718
