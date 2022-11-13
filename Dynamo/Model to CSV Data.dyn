@@ -76,9 +76,8 @@
       "Id": "10b1e5bfb8ac4787a699ba6793e21502",
       "Name": "Path for saving CSV files",
       "Type": "string",
-      "Value": "D:\\OneDrive - Technion\\Research Data\\AIPDORCS\\Dynamo",
-      "Description": "Allows you to select a directory on the system to get its path",
-      "SelectedIndex": 0
+      "Value": "C:\\Users\\alonf\\OneDrive - Technion\\Research Data\\AIPDORCS\\Dynamo",
+      "Description": "Allows you to select a directory on the system to get its path"
     },
     {
       "Id": "b1e065e7a588425ab8765530d1d0a23a",
@@ -89,32 +88,29 @@
       "MinimumValue": 0.0,
       "StepValue": 1.0,
       "NumberType": "Integer",
-      "Description": "A slider that produces integer values.",
-      "SelectedIndex": 0
+      "Description": "A slider that produces integer values."
     },
     {
       "Id": "e385f774d7ed419e956358d9f33784dd",
       "Name": "Gross Height",
       "Type": "number",
-      "Value": "3.5",
+      "Value": "3.07",
       "MaximumValue": 10.0,
       "MinimumValue": 2.5,
       "StepValue": 0.01,
       "NumberType": "Double",
-      "Description": "A slider that produces numeric values.",
-      "SelectedIndex": 0
+      "Description": "A slider that produces numeric values."
     },
     {
       "Id": "f038fd4aa6864f1681226130e51a9fae",
       "Name": "Structure Type: 1-Residential, 2-Commercial, 3-Indutrial",
       "Type": "number",
-      "Value": "2",
+      "Value": "1",
       "MaximumValue": 3.0,
       "MinimumValue": 1.0,
       "StepValue": 1.0,
       "NumberType": "Integer",
-      "Description": "A slider that produces integer values.",
-      "SelectedIndex": 0
+      "Description": "A slider that produces integer values."
     }
   ],
   "Outputs": [
@@ -123,7 +119,7 @@
       "Name": "Is There an Element Inside the Slab?",
       "Type": "unknown",
       "InitialValue": "",
-      "Description": "Visualize the node's output"
+      "Description": "Visualize the output of node."
     }
   ],
   "Nodes": [
@@ -425,7 +421,7 @@
         {
           "Id": "2f1adf7976084178928f3390e7bbc5cd",
           "Name": "centerPoint",
-          "Description": "Center point of circle\n\nPoint\nDefault value : Autodesk.DesignScript.Geometry.Point.ByCoordinates(0, 0, 0)",
+          "Description": "Point\nDefault value : Autodesk.DesignScript.Geometry.Point.ByCoordinates(0, 0, 0)",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -434,7 +430,7 @@
         {
           "Id": "ed21376b286e49cb87947953b6877b77",
           "Name": "radius",
-          "Description": "Radius\n\ndouble\nDefault value : 1",
+          "Description": "double\nDefault value : 1",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -445,7 +441,7 @@
         {
           "Id": "e03cd299b536481a9020fa7a8100fa6f",
           "Name": "Circle",
-          "Description": "Circle created with center point and radius",
+          "Description": "Circle",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -619,7 +615,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Visualize the node's output"
+      "Description": "Visualize the output of node."
     },
     {
       "ConcreteType": "CoreNodeModels.FromObject, CoreNodeModels",
@@ -938,8 +934,8 @@
         },
         {
           "Id": "203d89962d4c4a8e88a76b6d7a4f5811",
-          "Name": "amount",
-          "Description": "Layers of list nesting to remove (-1 will remove all list nestings)\n\nint\nDefault value : -1",
+          "Name": "amt",
+          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -949,8 +945,8 @@
       "Outputs": [
         {
           "Id": "91f8617b11534028b5ebf47a6dc61845",
-          "Name": "list",
-          "Description": "Flattened list by amount",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -958,7 +954,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amount: int = -1): var[]..[]"
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
     },
     {
       "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
@@ -1229,7 +1225,7 @@
     {
       "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
       "HintPath": "D:\\OneDrive - Technion\\Research Data\\AIPDORCS\\Dynamo",
-      "InputValue": "D:\\OneDrive - Technion\\Research Data\\AIPDORCS\\Dynamo",
+      "InputValue": "C:\\Users\\alonf\\OneDrive - Technion\\Research Data\\AIPDORCS\\Dynamo",
       "NodeType": "ExtensionNode",
       "Id": "10b1e5bfb8ac4787a699ba6793e21502",
       "Inputs": [],
@@ -1607,7 +1603,7 @@
         }
       ],
       "Replication": "Disabled",
-      "Description": "Visualize the node's output"
+      "Description": "Visualize the output of node."
     },
     {
       "ConcreteType": "CoreNodeModels.Input.IntegerSlider, CoreNodeModels",
@@ -1640,7 +1636,7 @@
       "MaximumValue": 10.0,
       "MinimumValue": 2.5,
       "StepValue": 0.01,
-      "InputValue": 3.5,
+      "InputValue": 3.07,
       "Id": "e385f774d7ed419e956358d9f33784dd",
       "Inputs": [],
       "Outputs": [
@@ -1904,7 +1900,7 @@
       "ConcreteType": "CoreNodeModels.Input.IntegerSlider, CoreNodeModels",
       "NodeType": "NumberInputNode",
       "NumberType": "Integer",
-      "InputValue": 2,
+      "InputValue": 1,
       "MaximumValue": 3,
       "MinimumValue": 1,
       "StepValue": 1,
@@ -2929,8 +2925,8 @@
         },
         {
           "Id": "a06b7ecfbc9b4c0dbac785069426c8da",
-          "Name": "amount",
-          "Description": "Layers of list nesting to remove (-1 will remove all list nestings)\n\nint\nDefault value : -1",
+          "Name": "amt",
+          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
           "UsingDefaultValue": true,
           "Level": 2,
           "UseLevels": false,
@@ -2940,8 +2936,8 @@
       "Outputs": [
         {
           "Id": "fb4c915575814a4ab5899858715b763c",
-          "Name": "list",
-          "Description": "Flattened list by amount",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -2949,7 +2945,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amount: int = -1): var[]..[]"
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -6167,36 +6163,13 @@
       ]
     }
   ],
-  "Thumbnail": "",
-  "GraphDocumentationURL": null,
-  "ExtensionWorkspaceData": [
-    {
-      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
-      "Name": "Properties",
-      "Version": "2.12",
-      "Data": {}
-    },
-    {
-      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
-      "Name": "Generative Design",
-      "Version": "1.10",
-      "Data": {}
-    }
-  ],
-  "Author": "None provided",
-  "Linting": {
-    "activeLinter": "None",
-    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
-    "warningCount": 0,
-    "errorCount": 0
-  },
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.12.0.5650",
+      "Version": "2.10.1.3976",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -7772,7 +7745,7 @@
         "Height": 234.14000000000033,
         "FontSize": 36.0,
         "InitialTop": 4087.2389685990884,
-        "InitialHeight": 258.13999999999987,
+        "InitialHeight": 258.14000000000033,
         "TextblockHeight": 43.0,
         "Background": "#FF71C6A8"
       },
@@ -7905,8 +7878,8 @@
         "Background": "#FFD4B6DB"
       }
     ],
-    "X": -141.58032757250294,
-    "Y": -174.08994064391072,
-    "Zoom": 0.14029669825678104
+    "X": -2516.6974096119025,
+    "Y": -4331.8395945719285,
+    "Zoom": 0.96481557958789865
   }
 }
