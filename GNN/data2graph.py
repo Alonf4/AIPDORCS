@@ -175,7 +175,8 @@ def nxGraphVisualization(model: int,
         plt.savefig(f'{DatabaseProjDir}\graph.png', dpi=300)
     else:
         plt.show()
-    # FIXME: Each new graph includes the previous graph nodes for some reason.
+    fig.clf()
+    
     # Timing function debug:
     finishTime = timeit.default_timer()
     if timeDebug:
@@ -335,7 +336,7 @@ def main():
     dynamoDir = f'{workspace}\\Dynamo'
     dataDir = f'{workspace}\\Database'
     Element.featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
-    modelCount = 20
+    modelCount = 10
     
     # Calling the functions:
     homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=True, timeDebug=False)
