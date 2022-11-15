@@ -131,7 +131,7 @@ def nodesToEdges(allNodes: list[Node],
         for connection in node.element.connections:
             # Creating a new edge class instance for each connection
             edge = Edge(id, node, nodeByID(allNodes, connection, timeDebug))
-            if edge not in edgesList: # FIXME: Direction should be determined by structural support.
+            if edge not in edgesList: # REVIEW: Direction should be determined by structural support.
                 edgesList.append(edge)
     
     # Timing function debug:
@@ -305,9 +305,6 @@ def homoGraphFromElementsInfo(dynamoDir: str,
         
         # Getting the DGL graph of each model in the dataset.
         graph = homoGraph(model, DatabaseProjDir, allNodes, visualizeGraph, figSave, timeDebug)
-        # TODO: Add the node features to the graph.
-        # TODO: Add the model labels to the graph.
-        # graph.ndata['feat'] = 
         graphList.append(graph)
         
         if gPrint:
@@ -320,7 +317,7 @@ def homoGraphFromElementsInfo(dynamoDir: str,
             print('==================================================')
     
     # FIXME: Add the actual labels from the Engineers' Challenge:
-    graphLabels = {"glabel": torch.tensor([0, 1])}
+    graphLabels = {"glabel": torch.tensor([0, 1, 1, 0, 1])}
     dgl.save_graphs(f'{dataDir}\\dataset.bin', graphList, graphLabels)
     
     # Timing function debug:
@@ -336,10 +333,10 @@ def main():
     dynamoDir = f'{workspace}\\Dynamo'
     dataDir = f'{workspace}\\Database'
     Element.featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
-    modelCount = 10
+    modelCount = 5
     
     # Calling the functions:
-    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=True, timeDebug=False)
+    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=False, timeDebug=False)
     
     # Timing the script:
     finishTime = timeit.default_timer()
