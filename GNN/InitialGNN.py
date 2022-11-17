@@ -13,14 +13,18 @@ class GCN(nn.Module):
     def __init__(self, in_feats, h_feats, num_classes):
         super(GCN, self).__init__()
         self.conv1 = GraphConv(in_feats, h_feats)
-        self.conv2 = GraphConv(h_feats, num_classes)
+        self.conv2 = GraphConv(h_feats, h_feats // 2)
+        self.fc = nn.Linear(h_feats // 2, num_classes)
 
     def forward(self, g, in_feat):
         h = self.conv1(g, in_feat)
         h = F.relu(h)
         h = self.conv2(g, h)
         g.ndata['h'] = h
-        return dgl.mean_nodes(g, 'h')
+        mean_nodes = dgl.mean_nodes(g, 'h')
+        graph_rep = self.fc(mean_nodes)
+        lsoftmax_vals = F.log_softmax(graph_rep, dim=1)
+        return lsoftmax_vals # REVIEW: Could be "F.softmax" or log softmax
 
 def main():
     workspace = os.getcwd()
@@ -52,28 +56,30 @@ def main():
     test_dataloader = GraphDataLoader(dataset, sampler=test_sampler, batch_size=batch_size, drop_last=False)
     
     # Output for testing the training dataset:
-    it = iter(train_dataloader)
-    batch = next(it)
-    print(batch)
+    # it = iter(train_dataloader)
+    # batch = next(it)
+    # print(batch)
     
-    batched_graph = batch
-    print('Number of nodes for each graph element in the batch:', batched_graph.batch_num_nodes())
-    print('Number of edges for each graph element in the batch:', batched_graph.batch_num_edges())
+    # batched_graph = batch
+    # print('Number of nodes for each graph element in the batch:', batched_graph.batch_num_nodes())
+    # print('Number of edges for each graph element in the batch:', batched_graph.batch_num_edges())
 
     # Recover the original graph elements from the minibatch
-    graphs = dgl.unbatch(batched_graph)
-    print('The original graphs in the minibatch:')
-    print(graphs)
+    # graphs = dgl.unbatch(batched_graph)
+    # print('The original graphs in the minibatch:')
+    # print(graphs)
     
     # Create the model with given dimensions
-    model = GCN(4, 16, 1)
+    model = GCN(4, 16, 2)
     # NOTE: 4 = Number of input features, 16 = Number of hidden features, 1 = Number of graph types
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
     
     for epoch in range(20):
         for i, batched_graph in enumerate(train_dataloader):
-            pred = model(batched_graph, batched_graph.ndata['feat'].float())
-            loss = F.cross_entropy(pred, labels['glabel'][i]) # FIXME: Maybe add more graphs?
+            lsoftmax_vals = model(batched_graph, batched_graph.ndata['feat'].float())
+            pred = lsoftmax_vals.argmax(dim=1)
+            print(labels['glabel'][i])
+            loss = F.cross_entropy(lsoftmax_vals, labels['glabel'][i]) # FIXME: Maybe add more graphs?
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
