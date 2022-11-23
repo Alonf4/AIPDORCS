@@ -77,10 +77,10 @@ def main():
     for epoch in range(20):
         for i, batched_graph in enumerate(train_dataloader):
             lsoftmax_vals = model(batched_graph, batched_graph.ndata['feat'].float())
-            pred = lsoftmax_vals.argmax(dim=1)
-            print(labels['glabel'][i])
-            loss = F.cross_entropy(lsoftmax_vals, labels['glabel'][i]) # FIXME: Maybe add more graphs?
+            pred = lsoftmax_vals.argmax(dim=1).float()
+            loss = F.binary_cross_entropy(pred[0], labels['glabel'][i].float()) # FIXME: Maybe add more graphs?
             optimizer.zero_grad()
+            loss = torch.autograd.Variable(loss, requires_grad = True)
             loss.backward()
             optimizer.step()
 
@@ -89,7 +89,7 @@ def main():
     for i, batched_graph in enumerate(test_dataloader):
         pred = model(batched_graph, batched_graph.ndata['feat'].float())
         num_correct += (pred.argmax(1) == labels['glabel'][i]).sum().item()
-        num_tests += len(labels['glabel'][i])
+        num_tests += 1
 
     print('Test accuracy:', num_correct / num_tests)
 
