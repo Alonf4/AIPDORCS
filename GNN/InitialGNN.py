@@ -40,6 +40,11 @@ def main():
     
     # Getting the graphs from our database:
     dataset, labels = dgl.load_graphs(datasetDir)
+    
+    # Adding self-loops for all graphs:
+    for i in range(len(dataset)):
+        dataset[i] = dgl.add_self_loop(dataset[i])
+    
     print(f"First graph's label: {labels['glabel'][0]}") # NOTE: Getting labels.
     # TODO: The graph features should also be in the labels argument.
     print(f"First graph's node features: {dataset[0].nodes()}")
