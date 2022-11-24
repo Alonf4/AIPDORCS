@@ -182,11 +182,47 @@ def nxGraphVisualization(model: int,
     if timeDebug:
         print(f'nxGraphVisualization() took {finishTime - startTime}s to run.')
 
+# --------------------- Calculating Project Average Score -------------------- #
+def modelAverageScore(model: int,
+                      ECFile: str):
+    # Read all data from the CSV file and sorting it:
+    df = pd.read_csv(ECFile)
+    df = df.sort_values(by=['Project ID'])
+    df = df.reset_index(drop = True)
+    
+    # Converting the model number to a string for comparison:
+    modelStr = f'Project {model:03d}'
+    
+    # Finding all scores for the given model number:
+    modelScores = []
+    for i, project in enumerate(df.loc[:, 'Project ID'].values.tolist()):
+        if project == modelStr:
+            modelScores.append(df.loc[:, 'Overall Score'].values.tolist()[i])
+    
+    # Returning the average score of the model:
+    return sum(modelScores) / len(modelScores)
+
+# ----------------- Graph Label by Final Layer Function Type ----------------- #
+def graphLabel(model: int, 
+               ECFile: str, 
+               finalLayerFunc: str, 
+               threshold: float=None):
+    score = modelAverageScore(model, ECFile)
+    
+    match finalLayerFunc:
+        case 'Regression':
+            return score
+        case 'Binary Classification':
+            return 1 if score >= threshold else 0
+
 # --------- Creating an Homogenous Graph from Nodes.csv and Edges.csv -------- #
 def homoGraph(model: int, 
               DatabaseProjDir: str, 
+              ECFile: str, 
               allNodes: list[Node], 
-              visualizeGraph:bool = True, 
+              finalLayerFunc: str, 
+              threshold: float=None, 
+              visualizeGraph:bool=True, 
               figSave:bool=True, 
               timeDebug:bool=False):
     """Creating an Homogenous DGL Graph based on Nodes.csv and Edges.csv files, and returns the graph.
@@ -195,7 +231,10 @@ def homoGraph(model: int,
     ----------
         ``model (int)``: Project number.
         ``DatabaseProjDir (str)``: A path of the project directory to get the graph data from.
+        ``ECFile (str)``: A path of the Engineers' Challenge CSV file.
         ``allNodes (list[Node])``: A list of all nodes in the graph.
+        ``finalLayerFunc (str)``: A string describing the final layer function.
+        ``threshold (float)``: A threshold score for binary classification.
         ``visualizeGraph (bool, optional)``: Whether or not to visualize the graph, True by default.
         ``figSave (bool, optional)``: Whether or not to save the graph figure, True by default.
         ``timeDebug (bool, optional)``: Whether or not to print function timing for debug, False by default.
@@ -203,6 +242,7 @@ def homoGraph(model: int,
     Returns
     -------
         ``(DGLHeteroGraph)``: A DGL graph object.
+        ``(float)``: A label for the graph - overall score.
     """
     startTime = timeit.default_timer()
     # Reading graph data from CSV files:
@@ -219,6 +259,7 @@ def homoGraph(model: int,
     features = torch.from_numpy(features).to(device)
     print(features.device)
     graph.ndata['feat'] = features # REVIEW: Check if getting node features correctly.
+    label = graphLabel(model, ECFile, finalLayerFunc, threshold)
     
     # If graph visualization is enabled, make a figure:
     if visualizeGraph:
@@ -232,12 +273,15 @@ def homoGraph(model: int,
     if timeDebug:
         print(f'homoGraph() took {finishTime - startTime}s to run.')
     
-    return graph
+    return graph, label
 
 # -------- Creating Nodes.csv and Edges.csv from Elements Information -------- #
 def homoGraphFromElementsInfo(dynamoDir: str, 
                               dataDir: str, 
+                              ECFile: str, 
                               modelCount: int, 
+                              finalLayerFunc: str, 
+                              threshold: float=None, 
                               gPrint:bool = True, 
                               visualizeGraph:bool = True, 
                               figSave:bool=True, 
@@ -248,7 +292,10 @@ def homoGraphFromElementsInfo(dynamoDir: str,
     ----------
         ``dynamoDir (str)``: A path to a directory containing all elements information from all models.
         ``dataDir (str)``: A path to a directory to save all graph information for each model.
+        ``ECFile (str)``: A path of the Engineers' Challenge CSV file.
         ``modelCount (int)``: The number of models in the dataset.
+        ``finalLayerFunc (str)``: A string describing the final layer function.
+        ``threshold (float)``: A threshold score for binary classification.
         ``gPrint (bool, optional)``: Whether or not to print each graph information, True by default.
         ``visualizeGraph (bool, optional)``: Whether or not to visualize each graph, True by default.
         ``figSave (bool, optional)``: Whether or not to save each graph figure, True by default.
@@ -256,6 +303,7 @@ def homoGraphFromElementsInfo(dynamoDir: str,
     """
     startTime = timeit.default_timer()
     graphList = []
+    labelList = []
     # List of structural element types possible:
     elementTypes = list(Element.featuresDict.keys())
     
@@ -304,20 +352,21 @@ def homoGraphFromElementsInfo(dynamoDir: str,
                 edges.writerow(allEdges[i].getEdgeAsList())
         
         # Getting the DGL graph of each model in the dataset.
-        graph = homoGraph(model, DatabaseProjDir, allNodes, visualizeGraph, figSave, timeDebug)
+        graph, label = homoGraph(model, DatabaseProjDir, ECFile, allNodes, finalLayerFunc, threshold, visualizeGraph, figSave, timeDebug)
         graphList.append(graph)
+        labelList.append(label)
         
         if gPrint:
             print(f'    Graph Information of Project {model:03d}:')
             print('==================================================')
             print(f'    Number of nodes: {graph.num_nodes()}')
             print(f'    Number of edges: {graph.num_edges()}')
+            print(f'    Graph label: {label}')
             print(f'    Is the graph homogenous: {graph.is_homogeneous}')
             print(f'    The graph device is: {graph.device}')
             print('==================================================')
     
-    # FIXME: Add the actual labels from the Engineers' Challenge:
-    graphLabels = {"glabel": torch.tensor([0, 1, 1, 0, 1])}
+    graphLabels = {"glabel": torch.tensor(labelList)}
     dgl.save_graphs(f'{dataDir}\\dataset.bin', graphList, graphLabels)
     
     # Timing function debug:
@@ -332,11 +381,21 @@ def main():
     workspace = os.getcwd()
     dynamoDir = f'{workspace}\\Dynamo'
     dataDir = f'{workspace}\\Database'
+    ECFile = f'{workspace}\\Website\\EngineersChallenge.csv'
     Element.featuresDict = {'Beam': 4, 'Column': 4, 'Slab': 5, 'Wall': 4}
-    modelCount = 5
+    finalLayerFunc = 'Binary Classification'
+    threshold = 75
+    modelCount = 48
     
     # Calling the functions:
-    homoGraphFromElementsInfo(dynamoDir, dataDir, modelCount, visualizeGraph=False, timeDebug=False)
+    homoGraphFromElementsInfo(dynamoDir, 
+                              dataDir, 
+                              ECFile, 
+                              modelCount, 
+                              finalLayerFunc=finalLayerFunc, 
+                              threshold=threshold, 
+                              visualizeGraph=True, 
+                              timeDebug=False)
     
     # Timing the script:
     finishTime = timeit.default_timer()
