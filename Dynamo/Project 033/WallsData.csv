@@ -81,7 +81,7 @@ Wall Height,299.999999999983
 Wall Width,19
 Wall Length,204.596493856757
 Wall Volume,1.11205001498345
-Wall Connections,W12,W22,S4,S6,,B11,S20,
+Wall Connections,W12,W22,S4,S6,B11,S20,
 Wall ID,W14
 Wall Height,299.999999999983
 Wall Width,19
@@ -153,7 +153,7 @@ Wall Height,299.999999999983
 Wall Width,25
 Wall Length,351.206361463929
 Wall Volume,2.43154771097932
-Wall Connections,W20,W108,S3,,S7,B11,S20,,,
+Wall Connections,W20,W108,S3,S7,B11,S20,,,
 Wall ID,W108
 Wall Height,299.999999999983
 Wall Width,35
