@@ -185,6 +185,17 @@ def nxGraphVisualization(model: int,
 # --------------------- Calculating Project Average Score -------------------- #
 def modelAverageScore(model: int,
                       ECFile: str):
+    """Calculating and returning the average score for a given project number, based on all answers from the Engineers' Challenge of this project.
+    
+    Parameters
+    ----------
+        ``model (int)``: Project number.
+        ``ECFile (str)``: A path of the Engineers' Challenge CSV file.
+    
+    Returns
+    -------
+        ``(float)``: The average score for the project.
+    """
     # Read all data from the CSV file and sorting it:
     df = pd.read_csv(ECFile)
     df = df.sort_values(by=['Project ID'])
@@ -207,6 +218,19 @@ def graphLabel(model: int,
                ECFile: str, 
                finalLayerFunc: str, 
                threshold: float=None):
+    """Getting the label for the project based on the overall score from the Engineers' Challenge.
+    
+    Parameters
+    ----------
+        ``model (int)``: Project number.
+        ``ECFile (str)``: A path of the Engineers' Challenge CSV file.
+        ``finalLayerFunc (str)``: A string describing the final layer function.
+        ``threshold (float, optional)``: A threshold score for binary classification, by default None.
+    
+    Returns
+    -------
+        ``(float | Literal[1, 0])``: A graph label: class or score
+    """
     score = modelAverageScore(model, ECFile)
     
     match finalLayerFunc:
