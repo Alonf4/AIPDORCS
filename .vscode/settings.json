@@ -3,13 +3,16 @@
         "AIPDORCS",
         "argmax",
         "arrowstyle",
+        "axvline",
         "cmap",
         "cuda",
         "dtype",
+        "edgecolor",
         "figsize",
         "fontsize",
         "glabel",
         "imshow",
+        "linestyle",
         "logits",
         "matplotlib",
         "MNIST",
@@ -19,7 +22,10 @@
         "savefig",
         "suptitle",
         "Technion",
-        "torchvision"
+        "torchvision",
+        "xlabel",
+        "xticks",
+        "ylabel"
     ],
     "python.analysis.typeCheckingMode": "off"
 }
