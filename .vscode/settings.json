@@ -16,6 +16,7 @@
         "logits",
         "matplotlib",
         "MNIST",
+        "ndata",
         "optim",
         "pyplot",
         "relu",
