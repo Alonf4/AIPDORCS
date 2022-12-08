@@ -7,6 +7,7 @@ class Element:
     Class Attributes
     ----------------
         ``featuresDict (dict)``: A dictionary with keys of element types and values of number of features.
+        ``commentsDict (dict)``: A dictionary with keys of Engineers' Challenge comments.
     
     Instance Attributes
     -------------------
@@ -14,6 +15,8 @@ class Element:
         ``type (str)``: The type of the structural element.
         ``features (list)``: All features of the structural element.
         ``connections (list)``: All connections to other structural elements
+        ``comments (list)``: All comments' values of each comment from the Engineers' Challenge.
+        ``points (float)``: Number of points subtracted for the comments from the Engineers' Challenge.
     
     Class Methods
     -------------
@@ -36,6 +39,7 @@ class Element:
     >>> # Output: '[B1],[1, 2, 3],[]'
     """
     featuresDict = {}
+    commentsDict = {}
     _countDict = {'Total': 0}
     
     # ---------------------------- Constructor Method ---------------------------- #
@@ -62,6 +66,10 @@ class Element:
         else:
             self.connections = []
         
+        # Initialize Engineer's Challenge features:
+        self.comments = [0.0] * len(self.commentsDict)
+        self.points = 0.0
+        
         # If this is the first instance of this type, initialize the counter for this type:
         if not self.type in Element._countDict.keys():
             Element._countDict[self.type] = 0
@@ -75,8 +83,13 @@ class Element:
         Element._countDict['Total'] -= 1
         Element._countDict[self.type] -= 1
     
+    # ------------------------------- String Method ------------------------------ #
     def __str__(self) -> str:
         return f'[{self.id}],{self.features},{self.connections}'
+    
+    # ----------------- Check if the Element Contains a Given ID ----------------- #
+    def __eq__(self, other) -> bool:
+        return (self.id == other)
     
     # ---------------- Get Number of Features for Homogenous Graph --------------- #
     @classmethod
@@ -138,10 +151,19 @@ class Node:
         self.nodeID = nodeID
         self.element = element
     
-    # ---------------- Converting Node to List for Nodes.csv File ---------------- #
-    def getNodeAsList(self):
+    # --------- Converting a Node With Only Geometric Features to a List --------- #
+    def NodeGeoFeaturesAsList(self):
         featureCount = self.element.homoFeatureCount()
         return [self.nodeID] + [self.element.id] + self.element.features[:featureCount]
+    
+    # --------------- Converting a Node With All Features to a List -------------- #
+    def NodeFullFeaturesAsList(self):
+        featureCount = self.element.homoFeatureCount()
+        return [self.nodeID] + \
+               [self.element.id] + \
+               self.element.features[:featureCount] + \
+               self.element.comments + \
+               [self.element.points]
 
 # ---------------------------------------------------------------------------- #
 #                               Graph Edge Class                               #
