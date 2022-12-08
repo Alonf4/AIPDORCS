@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader
 from dgl.dataloading import GraphDataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
 from dgl.nn import GraphConv
+import sklearn.metrics as sm
 
 class GCN(nn.Module):
     def __init__(self, in_feats, h_feats, num_classes):
@@ -45,16 +46,16 @@ def main():
     for i in range(len(dataset)):
         dataset[i] = dgl.add_self_loop(dataset[i])
     
-    print(f"First graph's label: {labels['glabel'][0]}") # NOTE: Getting labels.
+    # print(f"First graph's label: {labels['glabel'][0]}") # NOTE: Getting labels.
     # TODO: The graph features should also be in the labels argument.
-    print(f"First graph's node features: {dataset[0].nodes()}")
+    # print(f"First graph's node features: {dataset[0].nodes()}")
     
     num_examples = len(dataset)
     num_train = int(num_examples * 0.8)
     
     # data split
-    train_sampler = SubsetRandomSampler(torch.arange(num_train))
-    test_sampler = SubsetRandomSampler(torch.arange(num_train, num_examples))
+    train_sampler = torch.arange(num_train)
+    test_sampler = torch.arange(num_train, num_examples)
     
     # data batch for parallel computation
     train_dataloader = GraphDataLoader(dataset, sampler=train_sampler, batch_size=batch_size, drop_last=False)
@@ -83,20 +84,28 @@ def main():
         for i, batched_graph in enumerate(train_dataloader):
             lsoftmax_vals = model(batched_graph, batched_graph.ndata['feat'].float())
             pred = lsoftmax_vals.argmax(dim=1).float()
-            loss = F.binary_cross_entropy(pred[0], labels['glabel'][i].float()) # FIXME: Maybe add more graphs?
-            optimizer.zero_grad()
+            loss = F.binary_cross_entropy(pred[0], labels['glabel'][train_sampler[i]].float())
             loss = torch.autograd.Variable(loss, requires_grad = True)
+            optimizer.zero_grad()
             loss.backward()
             optimizer.step()
 
     num_correct = 0
     num_tests = 0
-    for i, batched_graph in enumerate(test_dataloader):
+    y_true = labels['glabel'][test_sampler].tolist()
+    y_pred = []
+    for batched_graph in test_dataloader:
         pred = model(batched_graph, batched_graph.ndata['feat'].float())
-        num_correct += (pred.argmax(1) == labels['glabel'][i]).sum().item()
+        num_correct += (pred.argmax(1) == labels['glabel'][test_sampler[num_tests]]).sum().item()
         num_tests += 1
+        y_pred.append(pred.argmax(1).tolist())
 
+    # FIXME: There is a serious problem with the predictions (every run is different)
+    print(f'Predictions: {y_pred}')
     print('Test accuracy:', num_correct / num_tests)
+    print(f'Accuracy: {sm.accuracy_score(y_true, y_pred)}')
+    print(f'Precision: {sm.average_precision_score(y_true, y_pred)}')
+    print(f'F1 Score: {sm.f1_score(y_true, y_pred)}')
 
 # ------------------------------- Run as Script ------------------------------ #
 if __name__ == '__main__':
