@@ -24,12 +24,28 @@ class GCN(nn.Module):
         g.ndata['h'] = h
         mean_nodes = dgl.mean_nodes(g, 'h')
         graph_rep = self.fc(mean_nodes)
-        lsoftmax_vals = F.log_softmax(graph_rep, dim=1)
-        return lsoftmax_vals # REVIEW: Could be "F.softmax" or log softmax
+        # lsoftmax_vals = F.log_softmax(graph_rep, dim=1)
+        # return lsoftmax_vals # REVIEW: Could be "F.softmax" or log softmax
+        return graph_rep
+    
+    # def __init__(self, in_dim, hidden_dim, n_classes):
+    #     super(GCN, self).__init__()
+    #     self.conv1 = GraphConv(in_dim, hidden_dim)
+    #     self.conv2 = GraphConv(hidden_dim, hidden_dim)
+    #     self.classify = nn.Linear(hidden_dim, n_classes)
+
+    # def forward(self, g, h):
+    #     # Perform graph convolution and activation function:
+    #     h = F.relu(self.conv1(g, h))
+    #     h = F.relu(self.conv2(g, h))
+    #     g.ndata['h'] = h
+    #     # Calculate graph representation by averaging all the node representations (Readout):
+    #     hg = dgl.mean_nodes(g, 'h')
+    #     return self.classify(hg)
 
 def main():
     workspace = os.getcwd()
-    datasetDir = f'{workspace}\\Database\\dataset.bin'
+    datasetDir = f'{workspace}\\Database\\dataset2.bin'
     
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     
@@ -41,6 +57,9 @@ def main():
     
     # Getting the graphs from our database:
     dataset, labels = dgl.load_graphs(datasetDir)
+    print(f'Dataset size: {len(dataset)}')
+    # Getting the number of node features of each graph:
+    in_feats = dataset[0].ndata['feat'].size(dim=1)
     
     # Adding self-loops for all graphs:
     for i in range(len(dataset)):
@@ -76,9 +95,9 @@ def main():
     # print(graphs)
     
     # Create the model with given dimensions
-    model = GCN(4, 16, 2)
+    model = GCN(in_feats, 16, 2)
     # NOTE: 4 = Number of input features, 16 = Number of hidden features, 1 = Number of graph types
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     
     for epoch in range(20):
         for i, batched_graph in enumerate(train_dataloader):
@@ -99,10 +118,11 @@ def main():
         num_correct += (pred.argmax(1) == labels['glabel'][test_sampler[num_tests]]).sum().item()
         num_tests += 1
         y_pred.append(pred.argmax(1).tolist())
+    accuracy = num_correct / num_tests
 
     # FIXME: There is a serious problem with the predictions (every run is different)
     print(f'Predictions: {y_pred}')
-    print('Test accuracy:', num_correct / num_tests)
+    print(f'Labels: {y_true}')
     print(f'Accuracy: {sm.accuracy_score(y_true, y_pred)}')
     print(f'Precision: {sm.average_precision_score(y_true, y_pred)}')
     print(f'F1 Score: {sm.f1_score(y_true, y_pred)}')
