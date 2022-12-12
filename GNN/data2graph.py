@@ -213,7 +213,8 @@ def nxGraphVisualization(model:int,
         print(f'nxGraphVisualization() took {finishTime - startTime}s to run.')
 
 # --------------------- Calculating Project Average Score -------------------- #
-def modelAverageScore(model:int,
+def modelAverageScore(model:int, 
+                      feedback:int, 
                       ECFile:str, 
                       timeDebug:bool=False):
     """Calculating and returning the average score for a given project number, based on all answers from the Engineers' Challenge of this project.
@@ -237,22 +238,32 @@ def modelAverageScore(model:int,
     # Converting the model number to a string for comparison:
     modelStr = f'Project {model:03d}'
     
-    # Finding all scores for the given model number:
+    # Finding all scores for the given model number and feedback number:
     modelScores = []
+    count = 0
     for i, project in enumerate(df.loc[:, 'Project ID'].values.tolist()):
         if project == modelStr:
             modelScores.append(df.loc[:, 'Overall Score'].values.tolist()[i])
+            
+            count += 1
+            if count == feedback:
+                feedbackScore = df.loc[:, 'Overall Score'].values.tolist()[i]
     
     # Timing function debug:
     finishTime = timeit.default_timer()
     if timeDebug:
         print(f'modelAverageScore() took {finishTime - startTime}s to run.')
     
-    # Returning the average score of the model:
-    return sum(modelScores) / len(modelScores)
+    if feedback == 0:
+        # The average score of the model:
+        return sum(modelScores) / len(modelScores)
+    else:
+        # The specific feedback score:
+        return feedbackScore
 
 # ----------------- Graph Label by Final Layer Function Type ----------------- #
 def graphLabel(model:int, 
+               feedback:int, 
                ECFile:str, 
                finalLayerFunc:str, 
                threshold:float=None, 
@@ -262,6 +273,7 @@ def graphLabel(model:int,
     Parameters
     ----------
         ``model (int)``: Project number.
+        ``feedback (int)``: Engineers' Challenge feedback number of a given model.
         ``ECFile (str)``: A path of the Engineers' Challenge CSV file.
         ``finalLayerFunc (str)``: A string describing the final layer function.
         ``threshold (float, optional)``: A threshold score for binary classification, by default None.
@@ -272,7 +284,7 @@ def graphLabel(model:int,
         ``(float | Literal[1, 0])``: A graph label: class or score
     """
     startTime = timeit.default_timer()
-    score = modelAverageScore(model, ECFile, timeDebug)
+    score = modelAverageScore(model, feedback, ECFile, timeDebug)
     
     match finalLayerFunc:
         case 'Regression':
@@ -289,6 +301,7 @@ def graphLabel(model:int,
 
 # --------- Creating an Homogenous Graph from Nodes.csv and Edges.csv -------- #
 def homoGraph(model:int, 
+              feedback:int, 
               DatabaseProjDir:str, 
               ECFile:str, 
               allNodes:list[Node], 
@@ -302,6 +315,7 @@ def homoGraph(model:int,
     Parameters
     ----------
         ``model (int)``: Project number.
+        ``feedback (int)``: Engineers' Challenge feedback number of a given model.
         ``DatabaseProjDir (str)``: A path of the project directory to get the graph data from.
         ``ECFile (str)``: A path of the Engineers' Challenge CSV file.
         ``allNodes (list[Node])``: A list of all nodes in the graph.
@@ -317,12 +331,19 @@ def homoGraph(model:int,
         ``(float)``: A label for the graph - overall score.
     """
     startTime = timeit.default_timer()
+    nodesNumber = "" if feedback == 0 else feedback
     # Reading graph data from CSV files:
-    nodesData = pd.read_csv(f'{DatabaseProjDir}\\Nodes.csv')
+    nodesData = pd.read_csv(f'{DatabaseProjDir}\\Nodes{nodesNumber}.csv')
     edgesData = pd.read_csv(f'{DatabaseProjDir}\\Edges.csv')
     src = edgesData['Src ID'].to_numpy()
     dst = edgesData['Dst ID'].to_numpy()
-    features = nodesData.loc[:, ['Dim 1','Dim 2','Dim 3','Volume']].to_numpy()
+    
+    # Getting graph features depending on the experiment (models vs Engineers' Challenge feedbacks):
+    if feedback == 0:
+        features = nodesData.loc[:, ['Dim 1','Dim 2','Dim 3','Volume']].to_numpy()
+    else:
+        websiteFeatures = list(Element.commentsDict.keys()) + ['Element Points']
+        features = nodesData.loc[:, ['Dim 1','Dim 2','Dim 3','Volume'] + websiteFeatures].to_numpy()
     
     # Creating an homogenous DGL graph:
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -330,7 +351,7 @@ def homoGraph(model:int,
     graph = dgl.add_reverse_edges(graph)
     features = torch.from_numpy(features).to(device)
     graph.ndata['feat'] = features # REVIEW: Check if getting node features correctly.
-    label = graphLabel(model, ECFile, finalLayerFunc, threshold, timeDebug)
+    label = graphLabel(model, feedback, ECFile, finalLayerFunc, threshold, timeDebug)
     
     # If graph visualization is enabled, make a figure:
     if visualizeGraph:
@@ -351,7 +372,6 @@ def homoGraphFromElementsInfo(websiteDir:str,
                               dynamoDir:str, 
                               dataDir:str, 
                               ECFile:str, 
-                              experiment: int, 
                               modelCount:int, 
                               finalLayerFunc:str, 
                               threshold:float=None, 
@@ -367,7 +387,6 @@ def homoGraphFromElementsInfo(websiteDir:str,
         ``dynamoDir (str)``: A path to a directory containing all elements information from all models.
         ``dataDir (str)``: A path to a directory to save all graph information for each model.
         ``ECFile (str)``: A path of the Engineers' Challenge CSV file.
-        ``experiment (int)``: An integer specifying the experiment type to run: 1-HomoModelGraphs, 2-HomoChallengeGraphs.
         ``modelCount (int)``: The number of models in the dataset.
         ``finalLayerFunc (str)``: A string describing the final layer function.
         ``threshold (float)``: A threshold score for binary classification.
@@ -378,7 +397,9 @@ def homoGraphFromElementsInfo(websiteDir:str,
     """
     startTime = timeit.default_timer()
     graphList = []
+    graphsList = []
     labelList = []
+    labelsList = []
     # List of structural element types possible:
     elementTypes = list(Element.featuresDict.keys())
     
@@ -427,12 +448,18 @@ def homoGraphFromElementsInfo(websiteDir:str,
                 edges.writerow(allEdges[i].getEdgeAsList())
         
         # Writing all features to Nodes#.csv file:
-        allFeaturesDataNodes(websiteDir, DatabaseProjDir, model, allElements)
+        feedbacks = allFeaturesDataNodes(websiteDir, DatabaseProjDir, model, allElements)
         
-        # Getting the DGL graph of each model in the dataset.
-        graph, label = homoGraph(model, DatabaseProjDir, ECFile, allNodes, finalLayerFunc, threshold, visualizeGraph, figSave, timeDebug)
+        # Getting the DGL graph of each model in the dataset:
+        graph, label = homoGraph(model, 0, DatabaseProjDir, ECFile, allNodes, finalLayerFunc, threshold, visualizeGraph, figSave, timeDebug)
         graphList.append(graph)
         labelList.append(label)
+        
+        # Getting the DGL graphs of each model and feedback in the dataset:
+        for feedback in range(1, feedbacks+1):
+            graphs, labels = homoGraph(model, feedback, DatabaseProjDir, ECFile, allNodes, finalLayerFunc, threshold, visualizeGraph, figSave, timeDebug)
+            graphsList.append(graphs)
+            labelsList.append(labels)
         
         if gPrint:
             print(f'    Graph Information of Project {model:03d}:')
@@ -445,7 +472,10 @@ def homoGraphFromElementsInfo(websiteDir:str,
             print('==================================================')
     
     graphLabels = {"glabel": torch.tensor(labelList)}
-    dgl.save_graphs(f'{dataDir}\\dataset.bin', graphList, graphLabels)
+    dgl.save_graphs(f'{dataDir}\\dataset1.bin', graphList, graphLabels)
+    
+    graphsLabels = {"glabel": torch.tensor(labelsList)}
+    dgl.save_graphs(f'{dataDir}\\dataset2.bin', graphsList, graphsLabels)
     
     # Timing function debug:
     finishTime = timeit.default_timer()
@@ -496,7 +526,6 @@ def main():
     finalLayerFunc = 'Binary Classification'
     threshold = 75
     modelCount = 48
-    experiment = 1
     
     # Creating an Histogram of overall scores based on the Engineers' Challenge:
     engineersChallengeHistogram(websiteDir, figSave=True)
@@ -506,7 +535,6 @@ def main():
                               dynamoDir, 
                               dataDir, 
                               ECFile, 
-                              experiment, 
                               modelCount, 
                               finalLayerFunc=finalLayerFunc, 
                               threshold=threshold, 

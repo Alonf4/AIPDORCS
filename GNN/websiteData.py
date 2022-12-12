@@ -162,7 +162,7 @@ def allFeaturesDataNodes(websiteDir:str,
                          DatabaseProjDir:str, 
                          model:int, 
                          allElements:list[Element]):
-    """Creating Nodes#.csv files for each feedback of the Engineers' Challenge. Returns nothing.
+    """Creating Nodes#.csv files for each feedback of the Engineers' Challenge. Returns the number of files created.
     
     Parameters
     ----------
@@ -170,6 +170,9 @@ def allFeaturesDataNodes(websiteDir:str,
         ``DatabaseProjDir (str)``: A path of the database directory to write the Nodes.csv files to.
         ``model (int)``: Project number.
         ``allElements (list[Element])``: A list of all structural elements of the given model.
+    Returns
+    -------
+        ``(int)``: The number of Nodes#.csv files created.
     """
     modelID = f'Project {model:03d}'
     fileName = f'{websiteDir}\\EngineersChallenge.csv'
@@ -208,3 +211,5 @@ def allFeaturesDataNodes(websiteDir:str,
                     # TODO: The features should be normalized before learning.
             
             answerCount += 1
+    
+    return answerCount - 1
