@@ -135,7 +135,7 @@ class Element:
 #                               Graph Node Class                               #
 # ---------------------------------------------------------------------------- #
 class Node:
-    """A class of a graph nodes, containing a node id and a structural element.
+    """A class of a graph node, containing a node id and a structural element.
     
     Instance Attributes
     -------------------

@@ -310,7 +310,7 @@ def homoGraph(model:int,
               visualizeGraph:bool=True, 
               figSave:bool=True, 
               timeDebug:bool=False):
-    """Creating an Homogenous DGL Graph based on Nodes.csv and Edges.csv files, and returns the graph.
+    """Creating an Homogenous DGL Graph based on Nodes.csv and Edges.csv files, and returns the graph and the associated label.
     
     Parameters
     ----------
@@ -527,8 +527,11 @@ def main():
     threshold = 75
     modelCount = 48
     
-    # Creating an Histogram of overall scores based on the Engineers' Challenge:
+    # Plotting some results of the Engineers' Challenge:
     engineersChallengeHistogram(websiteDir, figSave=True)
+    experienceBarPlot(websiteDir, experienceMultiplier, figSave=True)
+    commentsBarPlot(websiteDir, figSave=True)
+    commentTypeBarPlot(websiteDir, figSave=True)
     
     # Calling the functions:
     homoGraphFromElementsInfo(websiteDir, 
